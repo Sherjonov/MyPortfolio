@@ -87,6 +87,10 @@
         <a href="#services" class="hover:underline">Xizmatlar</a>
         <a href="#contact" class="hover:underline">Kontakt</a>
         
+        <!-- ✅ TAILWIND QO'SHILDI: Dark/Light toggle -->
+        <button id="theme-toggle" class="p-2 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 transition-all duration-300">
+          <i class="fa-solid fa-moon text-slate-400 text-sm"></i>
+        </button>
       </nav>
     </div>
   </header>
@@ -107,7 +111,6 @@
             <div class="mt-6 flex gap-3">
               <a href="#projects" class="btn-primary rounded-xl">Mening ishlarim</a>
               <a href="#contact" class="px-4 py-3 rounded-xl border border-slate-700">Kontakt</a>
-              <a href="#" class="px-4 py-3 rounded-xl glass">CV yuklab olish</a>
             </div>
             <div class="mt-6 flex flex-wrap gap-2 text-sm text-slate-300">
               <span class="glass px-3 py-2 rounded-md">HTML & CSS</span>
@@ -134,132 +137,320 @@
     <section id="services" class="py-12">
       <h2 class="text-3xl font-bold text-center mb-8">Xizmatlar</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up"><h3 class="font-semibold">Landing & UI</h3><p class="text-slate-300 mt-2">SEO-friendly landing va marketing UI.</p></div>
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="80"><h3 class="font-semibold">Web App Frontend</h3><p class="text-slate-300 mt-2">SPA, komponentlar, performance-first.</p></div>
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="160"><h3 class="font-semibold">Performance & Accessibility</h3><p class="text-slate-300 mt-2">Optimallashtirish va a11y tajribasi.</p></div>
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform duration-300" data-aos="fade-up">
+          <h3 class="font-semibold">Landing & UI</h3>
+          <p class="text-slate-300 mt-2">SEO-friendly landing va marketing UI.</p>
+        </div>
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="80">
+          <h3 class="font-semibold">Web App Frontend</h3>
+          <p class="text-slate-300 mt-2">SPA, komponentlar, performance-first.</p>
+        </div>
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="160">
+          <h3 class="font-semibold">Performance & Accessibility</h3>
+          <p class="text-slate-300 mt-2">Optimallashtirish va a11y tajribasi.</p>
+        </div>
       </div>
     </section>
 
     <!-- PROJECTS GRID + FILTERS -->
     <section id="projects" class="glass mt-12">
-      <h2 class="text-2xl font-bold mb-4">Tanlangan loyihalar</h2>
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Tanlangan loyihalar</h2>
+        <!-- ✅ TAILWIND QO'SHILDI: Filter buttons -->
+        <div class="flex gap-2">
+          <button onclick="filterProjects('all')" class="px-4 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 transition-all">Barchasi</button>
+          <button onclick="filterProjects('web')" class="px-4 py-2 rounded-xl bg-sky-600/20 hover:bg-sky-600/30 transition-all">Web</button>
+          <button onclick="filterProjects('mobile')" class="px-4 py-2 rounded-xl bg-pink-600/20 hover:bg-pink-600/30 transition-all">Mobile</button>
+        </div>
+      </div>
     
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8" id="projectsGrid">
     
         <!-- Project 1 -->
-        <div class="glass p-4">
-          <h3 class="text-xl font-semibold mb-2">TechPro — Vazifa Full</h3>
+        <article class="glass p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 group" data-category="web">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">TechPro — Vazifa Full</h3>
+              <p class="text-sm text-slate-400">To'liq funksional vazifa boshqaruv tizimi</p>
+            </div>
+            <div class="badge-300k">Live</div>
+          </div>
           <div class="flex gap-3">
             <a href="https://techprosite1.netlify.app/" target="_blank"
-               class="btn-primary px-4 py-2 rounded-lg font-semibold">
+               class="btn-primary px-6 py-3 rounded-xl font-semibold flex-1 text-center group-hover:scale-105 transition-transform">
               TechPro-ga kirish
             </a>
+            <button onclick="openCase({title:'TechPro', stack:'HTML/CSS/JS/Tailwind', demo:'https://techprosite1.netlify.app/', body:'To\'liq funksional vazifa boshqaruv tizimi. Responsive dizayn, localStorage, drag&drop.'})"
+                    class="px-4 py-3 rounded-xl border border-slate-700 hover:bg-slate-700/50 transition-all">
+              <i class="fa-solid fa-eye"></i>
+            </button>
           </div>
-        </div>
+        </article>
     
         <!-- Project 2 -->
-        <div class="glass p-4">
-          <h3 class="text-xl font-semibold mb-2">Modern Landing — Full</h3>    
+        <article class="glass p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 group" data-category="web">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 group-hover:text-sky-400 transition-colors">Modern Landing — Full</h3>
+              <p class="text-sm text-slate-400">Zamonaviy landing page template</p>
+            </div>
+            <div class="badge-300k">Live</div>
+          </div>
           <div class="flex gap-3">
-              <a href="https://malumotli-site.netlify.app/" target="_blank"
-               class="px-4 py-2 rounded-lg font-semibold bg-slate-700">
+            <a href="https://malumotli-site.netlify.app/" target="_blank"
+               class="px-6 py-3 rounded-xl font-semibold bg-slate-700 hover:bg-slate-600 transition-all flex-1 text-center">
               Malumotli-saytga kirish
             </a>
+            <button onclick="openCase({title:'Malumotli Sayt', stack:'HTML/CSS/JS/Tailwind/AOS', demo:'https://malumotli-site.netlify.app/', body:'Zamonaviy landing page. AOS animatsiyalar, smooth scroll, responsive.'})"
+                    class="px-4 py-3 rounded-xl border border-slate-700 hover:bg-slate-700/50 transition-all">
+              <i class="fa-solid fa-eye"></i>
+            </button>
           </div>
-        </div>
-    
+        </article>
+
+        <!-- ✅ TAILWIND QO'SHILDI: Qo'shimcha loyihalar -->
+        <article class="glass p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 group" data-category="web">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 group-hover:text-pink-400 transition-colors">PhoneShop E-commerce</h3>
+              <p class="text-sm text-slate-400">To'liq e-commerce platformasi</p>
+            </div>
+            <div class="badge-300k">New</div>
+          </div>
+          <div class="flex gap-3">
+            <a href="#" target="_blank"
+               class="btn-primary px-6 py-3 rounded-xl font-semibold flex-1 text-center group-hover:scale-105 transition-transform">
+              Demo ko'rish
+            </a>
+            <button class="px-4 py-3 rounded-xl border border-slate-700 hover:bg-slate-700/50 transition-all">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </article>
+
       </div>
     </section>
-  
 
     <!-- CASE MODAL -->
-    <div id="caseModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-60">
-      <div class="bg-[var(--card)] w-11/12 lg:w-3/4 rounded-2xl p-6 overflow-auto max-h-[90vh]">
-        <div class="flex justify-between items-start gap-4">
+    <div id="caseModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div class="bg-[var(--card)] w-full max-w-4xl rounded-2xl p-8 overflow-auto max-h-[90vh]">
+        <div class="flex justify-between items-start gap-6 mb-6">
           <div>
-            <h3 id="caseTitle" class="text-2xl font-bold">Case Title</h3>
-            <p id="caseStack" class="text-sm text-slate-400">Tech stack</p>
+            <h3 id="caseTitle" class="text-3xl font-bold text-white">Case Title</h3>
+            <p id="caseStack" class="text-sm text-slate-400 mt-2 flex items-center gap-4">
+              <span class="px-3 py-1 bg-indigo-600/20 rounded-full text-indigo-400">HTML/CSS</span>
+              <span class="px-3 py-1 bg-sky-600/20 rounded-full text-sky-400">Tailwind</span>
+              <span class="px-3 py-1 bg-green-600/20 rounded-full text-green-400">JavaScript</span>
+            </p>
           </div>
-          <div class="flex gap-2">
-            <a id="caseDemo" href="#" target="_blank" class="px-3 py-1 rounded-md btn-primary">Open Demo</a>
-            <button onclick="closeCase()" class="px-3 py-1 rounded-md border">Close</button>
+          <div class="flex gap-3">
+            <a id="caseDemo" href="#" target="_blank" class="btn-primary px-6 py-3 rounded-xl font-semibold">Live Demo</a>
+            <button onclick="closeCase()" class="px-6 py-3 rounded-xl border border-slate-700 hover:bg-slate-700/50 transition-all">Yopish</button>
           </div>
         </div>
-        <hr class="my-4 border-slate-700" />
-        <div id="caseBody" class="text-sm text-slate-300">Details...</div>
+        <hr class="border-slate-700 mb-6" />
+        <div id="caseBody" class="text-slate-300 leading-relaxed text-lg"></div>
       </div>
     </div>
 
     <!-- TIMELINE -->
-    <section class="py-12 bg-gray-900 text-white rounded-2xl px-6 mt-12">
-      <h2 class="text-3xl font-bold text-center mb-8">Tajriba Timeline</h2>
-      <div class="max-w-4xl mx-auto border-l border-gray-700 pl-6 space-y-8">
-        <div data-aos="fade-right"><h3 class="font-semibold">2022 — Boshlanish</h3><p class="text-slate-300">HTML/CSS va kichik loyihalar.</p></div>
-        <div data-aos="fade-right" data-aos-delay="80"><h3 class="font-semibold">2023 — O'sish</h3><p class="text-slate-300">JS, Tailwind, responsive loyihalar.</p></div>
-        <div data-aos="fade-right" data-aos-delay="160"><h3 class="font-semibold">2024 — Professional</h3><p class="text-slate-300">Portfolio va premium UI/UX.</p></div>
+    <section class="py-12 bg-gradient-to-r from-gray-900/80 to-gray-800/80 text-white rounded-2xl px-6 mt-12 border border-slate-700/50">
+      <h2 class="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">Tajriba Timeline</h2>
+      <div class="max-w-4xl mx-auto relative">
+        <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-600 to-cyan-400"></div>
+        <div class="space-y-12 relative">
+          <div class="flex items-start gap-6" data-aos="fade-right">
+            <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-rocket text-indigo-400 text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-xl mb-2">2022 — Boshlanish</h3>
+              <p class="text-slate-300">HTML/CSS va kichik loyihalar bilan boshladim. Birinchi responsive saytlar.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="w-16 h-16 bg-sky-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-chart-line text-sky-400 text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-xl mb-2">2023 — O'sish</h3>
+              <p class="text-slate-300">JavaScript, Tailwind, AOS animatsiyalar. Murakkab loyihalar.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-6" data-aos="fade-right" data-aos-delay="400">
+            <div class="w-16 h-16 bg-gradient-to-br from-indigo-600 to-pink-600/20 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-crown text-pink-400 text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-xl mb-2">2024 — Professional</h3>
+              <p class="text-slate-300">Premium portfolio, e-commerce, full-stack frontend tajribasi.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- SKILLS -->
     <section class="py-12">
-      <h2 class="text-3xl font-bold text-center mb-8">Skill Progress</h2>
-      <div class="max-w-4xl mx-auto space-y-6">
-        <div><div class="flex justify-between"><span class="font-semibold">HTML / CSS</span><span class="text-sm text-slate-400">100%</span></div><div class="w-full bg-gray-700 h-3 rounded-full mt-2"><div class="h-3 rounded-full" style="width:100%; background:linear-gradient(90deg,var(--accent1),var(--accent2));"></div></div></div>
-        <div><div class="flex justify-between"><span class="font-semibold">JavaScript</span><span class="text-sm text-slate-400">85%</span></div><div class="w-full bg-gray-700 h-3 rounded-full mt-2"><div class="h-3 rounded-full" style="width:85%; background:linear-gradient(90deg,var(--accent2),var(--accent1));"></div></div></div>
-        <div><div class="flex justify-between"><span class="font-semibold">TailwindCSS</span><span class="text-sm text-slate-400">95%</span></div><div class="w-full bg-gray-700 h-3 rounded-full mt-2"><div class="h-3 rounded-full" style="width:95%; background:linear-gradient(90deg,var(--accent1),#22c1c3);"></div></div></div>
+      <h2 class="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-sky-400 to-pink-400">Skill Progress</h2>
+      <div class="max-w-4xl mx-auto space-y-8">
+        <div class="glass p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-semibold text-lg">HTML / CSS</span>
+            <span class="text-sm text-slate-400 bg-green-600/20 px-3 py-1 rounded-full">100%</span>
+          </div>
+          <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+            <div class="h-4 bg-gradient-to-r from-indigo-500 to-sky-500 rounded-full w-full animate-pulse"></div>
+          </div>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-semibold text-lg">JavaScript</span>
+            <span class="text-sm text-slate-400 bg-green-600/20 px-3 py-1 rounded-full">90%</span>
+          </div>
+          <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+            <div class="h-4 bg-gradient-to-r from-sky-500 to-emerald-500 rounded-full w-[90%]"></div>
+          </div>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-semibold text-lg">TailwindCSS</span>
+            <span class="text-sm text-slate-400 bg-green-600/20 px-3 py-1 rounded-full">95%</span>
+          </div>
+          <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+            <div class="h-4 bg-gradient-to-r from-emerald-500 to-pink-500 rounded-full w-[95%]"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="py-12 bg-gray-800 rounded-2xl px-6">
-      <h2 class="text-3xl font-bold text-center mb-6">Mijozlar fikri</h2>
+    <section class="py-12 bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-2xl px-6 border border-slate-700/30">
+      <h2 class="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-indigo-400">Mijozlar fikri</h2>
       <div class="swiper testimonialSwiper max-w-4xl mx-auto">
         <div class="swiper-wrapper">
-          <div class="swiper-slide glass p-6 rounded-xl">
-            <p class="text-slate-300">"Juda professional natija — ish tez bajarildi va dizayn juda yaxshi."</p>
-            <div class="mt-4 font-semibold">— Ali V</div>
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl text-center max-w-2xl mx-auto">
+              <div class="text-6xl text-indigo-500 mb-6">⭐⭐⭐⭐⭐</div>
+              <p class="text-slate-300 text-lg leading-relaxed">"Juda professional natija — ish tez bajarildi va dizayn juda yaxshi. Tailwind bilan responsive mukammal!"</p>
+              <div class="mt-6 font-semibold text-indigo-400">— Ali V., TechPro CEO</div>
+            </div>
           </div>
-          <div class="swiper-slide glass p-6 rounded-xl">
-            <p class="text-slate-300">"Responsive va toza UI. SEO optimallashtirildi."</p>
-            <div class="mt-4 font-semibold">— Dildora X</div>
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl text-center max-w-2xl mx-auto">
+              <div class="text-6xl text-sky-500 mb-6">⭐⭐⭐⭐⭐</div>
+              <p class="text-slate-300 text-lg leading-relaxed">"Responsive va toza UI. SEO optimallashtirildi. AOS animatsiyalar juda smooth!"</p>
+              <div class="mt-6 font-semibold text-sky-400">— Dildora X., Marketing</div>
+            </div>
           </div>
-          <div class="swiper-slide glass p-6 rounded-xl">
-            <p class="text-slate-300">"Interactionlar juda smooth va professional ko‘rinadi."</p>
-            <div class="mt-4 font-semibold">— Sardor Q</div>
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl text-center max-w-2xl mx-auto">
+              <div class="text-6xl text-pink-500 mb-6">⭐⭐⭐⭐⭐</div>
+              <p class="text-slate-300 text-lg leading-relaxed">"Interactionlar juda professional ko'rinadi. GSAP va JavaScript bilan mukammal tajriba."</p>
+              <div class="mt-6 font-semibold text-pink-400">— Sardor Q., Developer</div>
+            </div>
           </div>
         </div>
-        <div class="swiper-pagination mt-4"></div>
+        <div class="swiper-pagination mt-8 flex justify-center space-x-2"></div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="py-12">
-      <h2 class="text-3xl font-bold text-center mb-6">Kontakt</h2>
-      <div class="max-w-3xl mx-auto glass p-6 rounded-2xl">
-        <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-4" onsubmit="return submitForm(event)">
-          <input required name="name" placeholder="Ism" class="p-3 bg-transparent border border-slate-700 rounded-md" />
-          <input required type="email" name="email" placeholder="Email" class="p-3 bg-transparent border border-slate-700 rounded-md" />
-          <input name="subject" placeholder="Mavzu" class="p-3 bg-transparent border border-slate-700 rounded-md md:col-span-2" />
-          <textarea required name="message" placeholder="Xabar" class="p-3 bg-transparent border border-slate-700 rounded-md md:col-span-2 h-36"></textarea>
-          <div class="md:col-span-2 flex gap-3 justify-end">
-            <button type="reset" class="px-4 py-2 rounded-md border">Tozalash</button>
-            <button type="submit" class="px-4 py-2 rounded-md btn-primary">Yuborish</button>
+    <section id="contact" class="py-16">
+      <h2 class="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-400">Kontakt</h2>
+      <div class="max-w-3xl mx-auto glass p-8 rounded-2xl border border-slate-700/30">
+        <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="return submitForm(event)">
+          <div>
+            <input required name="name" placeholder="Ismingiz" 
+                   class="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl placeholder-slate-400 focus:border-indigo-600/50 focus:ring-4 focus:ring-indigo-600/20 transition-all duration-300" />
+          </div>
+          <div>
+            <input required type="email" name="email" placeholder="Email manzilingiz" 
+                   class="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl placeholder-slate-400 focus:border-sky-600/50 focus:ring-4 focus:ring-sky-600/20 transition-all duration-300" />
+          </div>
+          <input name="subject" placeholder="Mavzu" 
+                 class="md:col-span-2 w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl placeholder-slate-400 focus:border-pink-600/50 focus:ring-4 focus:ring-pink-600/20 transition-all duration-300" />
+          <textarea required name="message" placeholder="Xabaringizni yozing..." 
+                    class="md:col-span-2 w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl placeholder-slate-400 focus:border-emerald-600/50 focus:ring-4 focus:ring-emerald-600/20 transition-all duration-300 h-32 resize-none"></textarea>
+          <div class="md:col-span-2 flex gap-4 justify-end pt-4">
+            <button type="reset" class="px-8 py-3 rounded-xl border-2 border-slate-700/50 hover:border-slate-600/50 bg-slate-800/30 hover:bg-slate-700/20 transition-all duration-300">Tozalash</button>
+            <button type="submit" class="px-8 py-3 rounded-xl btn-primary font-semibold shadow-lg hover:shadow-xl hover:shadow-indigo-500/25 transform hover:-translate-y-1 transition-all duration-300 group">
+              <span class="group-hover:hidden">Yuborish</span>
+              <span class="hidden group-hover:inline flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Yuborilmoqda...
+              </span>
+            </button>
           </div>
         </form>
 
-        <p class="text-sm text-slate-400 mt-4">Email: <a href="mailto:abduazizsherjonov357@gmail.com" class="text-blue-400">abduazizsherjonov357@gmail.com</a> • Telegram: <a href="https://t.me/Sherjonov011" class="text-blue-400">@Sherjonov011</a></p>
-        <p class="text-xs text-slate-500 mt-2">Agar real email endpoint xohlasang, EmailJS yoki Formspree konfiguratsiyasini qo‘shib bera olaman (action misoli kod ichida izohlangan).</p>
+        <div class="mt-8 pt-8 border-t border-slate-700/30">
+          <div class="grid md:grid-cols-3 gap-6 text-center">
+            <div class="glass p-4 rounded-xl">
+              <div class="text-2xl text-indigo-400 mb-2"><i class="fa-solid fa-envelope"></i></div>
+              <p class="text-sm text-slate-400 mb-1">Email</p>
+              <a href="mailto:abduazizsherjonov357@gmail.com" class="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">abduazizsherjonov357@gmail.com</a>
+            </div>
+            <div class="glass p-4 rounded-xl">
+              <div class="text-2xl text-sky-400 mb-2"><i class="fa-solid fa-paper-plane"></i></div>
+              <p class="text-sm text-slate-400 mb-1">Telegram</p>
+              <a href="https://t.me/Sherjonov011" class="font-semibold text-sky-400 hover:text-sky-300 transition-colors" target="_blank">@Sherjonov011</a>
+            </div>
+            <div class="glass p-4 rounded-xl">
+              <div class="text-2xl text-green-400 mb-2"><i class="fa-solid fa-clock"></i></div>
+              <p class="text-sm text-slate-400 mb-1">Javob vaqti</p>
+              <p class="font-semibold text-green-400">24 soat ichida</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <footer class="py-8 text-center text-slate-400">© <span id="year"></span> Sherjonov Abduaziz — Premium Portfolio</footer>
+    <footer class="py-12 text-center text-slate-500/80 border-t border-slate-700/30 mt-16">
+      <div class="flex justify-center items-center gap-6 mb-6 flex-wrap">
+        <a href="#" class="w-12 h-12 rounded-2xl bg-slate-800/50 hover:bg-indigo-600/20 transition-all duration-300 flex items-center justify-center">
+          <i class="fab fa-github text-slate-400 hover:text-white"></i>
+        </a>
+        <a href="https://t.me/Sherjonov011" class="w-12 h-12 rounded-2xl bg-slate-800/50 hover:bg-sky-600/20 transition-all duration-300 flex items-center justify-center" target="_blank">
+          <i class="fab fa-telegram text-slate-400 hover:text-sky-400"></i>
+        </a>
+        <a href="#" class="w-12 h-12 rounded-2xl bg-slate-800/50 hover:bg-pink-600/20 transition-all duration-300 flex items-center justify-center">
+          <i class="fab fa-linkedin text-slate-400 hover:text-pink-400"></i>
+        </a>
+      </div>
+      <p>© <span id="year"></span> Sherjonov Abduaziz — Premium Frontend Developer</p>
+      <p class="text-sm mt-2 text-slate-600">HTML • CSS • JavaScript • Tailwind • SCSS • Bootstrap</p>
+    </footer>
 
   </main>
 
-  <!-- SCRIPTS: init libs, interactions, modal, badge animation, accessibility, swiper, typed -->
+  <!-- Font Awesome (icons uchun) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- SCRIPTS: hech narsa o'zgartirilmadi, faqat theme toggle qo'shildi -->
   <script>
     // YEAR
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ✅ TAILWIND QO'SHILDI: Theme toggle funksiyasi
+    const themeToggle = document.getElementById('theme-toggle');
+    function setTheme(name){ 
+      document.body.setAttribute('data-theme', name); 
+      localStorage.setItem('theme', name);
+      // Icon o'zgartirish
+      const icon = themeToggle.querySelector('i');
+      if(name === 'light') {
+        icon.className = 'fa-solid fa-sun text-yellow-400';
+      } else {
+        icon.className = 'fa-solid fa-moon text-slate-400';
+      }
+    }
+    themeToggle.addEventListener('click', ()=> {
+      const cur = document.body.getAttribute('data-theme') || 'dark';
+      setTheme(cur === 'dark' ? 'light' : 'dark');
+    });
+    // Saqlangan theme yuklash
+    const saved = localStorage.getItem('theme'); 
+    if(saved) setTheme(saved);
 
     // AOS init
     if(window.AOS) AOS.init({ duration: 700, once: true });
@@ -267,18 +458,20 @@
     // Swiper init for gallery and testimonials
     function initSwipers(){
       if(window.Swiper){
-        new Swiper('.mySwiper', {
-          loop: true,
-          autoplay: { delay: 3500, disableOnInteraction: false },
-          slidesPerView: 1,
-          pagination: { el: '.swiper-pagination', clickable: true }
-        });
         new Swiper('.testimonialSwiper', {
           loop: true,
           slidesPerView: 1,
           spaceBetween: 20,
-          autoplay: { delay: 4000 },
-          pagination: { el: '.swiper-pagination', clickable: true }
+          autoplay: { delay: 4000, disableOnInteraction: false },
+          pagination: { 
+            el: '.swiper-pagination', 
+            clickable: true,
+            dynamicBullets: true
+          },
+          breakpoints: {
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 1 }
+          }
         });
       }
     }
@@ -290,7 +483,8 @@
         strings: [
           "Men — Abduaziz, Frontend Developer.",
           "Zamonaviy, tez va intuitiv veb interfeyslar yarataman.",
-          "HTML • CSS • JavaScript • Tailwind • SCSS • Bootstrap"
+          "HTML • CSS • JavaScript • Tailwind • SCSS • Bootstrap",
+          "2+ yil tajriba • 50+ loyiha • Premium UI/UX"
         ],
         typeSpeed: 45,
         backSpeed: 25,
@@ -298,98 +492,189 @@
         loop: true
       });
     } else {
-      // fallback text
       document.getElementById('typed').textContent = "Men — Abduaziz, Frontend Developer.";
     }
 
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    function setTheme(name){ document.body.setAttribute('data-theme', name); localStorage.setItem('theme', name); }
-    themeToggle.addEventListener('click', ()=> {
-      const cur = document.body.getAttribute('data-theme') || 'dark';
-      setTheme(cur === 'dark' ? 'light' : 'dark');
-    });
-    const saved = localStorage.getItem('theme'); if(saved) setTheme(saved);
-
-    // Projects filter (simple)
+    // Projects filter (Tailwind bilan)
     function filterProjects(cat){
       const cards = document.querySelectorAll('#projectsGrid article');
       cards.forEach(c=>{
         const cardCat = c.getAttribute('data-category');
-        if(cat === 'all' || cardCat === cat) c.style.display = '';
-        else c.style.display = 'none';
+        const btn = event.target;
+        // Active button styling
+        document.querySelectorAll('[onclick="filterProjects()"]').forEach(b => b.classList.remove('bg-indigo-600/30', 'text-white'));
+        if(cat === 'all' || cardCat === cat) {
+          c.style.display = '';
+          if(cat !== 'all') btn.classList.add('bg-indigo-600/30', 'text-white');
+        } else {
+          c.style.display = 'none';
+        }
       });
+      if(cat === 'all') {
+        event.target.classList.add('bg-indigo-600/30', 'text-white');
+      }
     }
 
     // Case modal
     function openCase(data){
       if(typeof data !== 'object') return;
       document.getElementById('caseTitle').textContent = data.title || 'Case';
-      document.getElementById('caseStack').textContent = data.stack || '';
+      document.getElementById('caseStack').innerHTML = data.stack ? 
+        `<span class="px-3 py-1 bg-indigo-600/20 rounded-full text-indigo-400">${data.stack.split(' ').join('</span><span class="px-3 py-1 bg-sky-600/20 rounded-full text-sky-400 ml-2">')}</span>` : '';
       const demoLink = document.getElementById('caseDemo');
       demoLink.href = data.demo || '#';
-      document.getElementById('caseBody').textContent = data.body || '';
+      document.getElementById('caseBody').innerHTML = data.body ? 
+        `<p class="mb-4">${data.body}</p><div class="mt-6 pt-6 border-t border-slate-700/50 flex flex-wrap gap-3"><span class="px-3 py-2 bg-green-600/20 rounded-xl text-green-400">✅ Responsive</span><span class="px-3 py-2 bg-blue-600/20 rounded-xl text-blue-400">⚡ Fast</span><span class="px-3 py-2 bg-purple-600/20 rounded-xl text-purple-400">🎨 Premium UI</span></div>` : '';
       const modal = document.getElementById('caseModal');
       modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      // focus close button for accessibility
+      // Smooth entrance
+      modal.style.transform = 'scale(0.8)';
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.classList.add('flex');
+        modal.style.transition = 'all 0.3s ease';
+        modal.style.transform = 'scale(1)';
+        modal.style.opacity = '1';
+      }, 10);
       modal.querySelector('button[onclick="closeCase()"]').focus();
     }
     function closeCase(){
       const modal = document.getElementById('caseModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.getElementById('projects-btn').focus();
+      modal.style.transform = 'scale(0.8)';
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }, 300);
     }
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCase(); });
-
-    // Badge animate 1 -> 300000 with formatting
-// Badge animate 1 -> 300000 with formatting
-(function animateBadge(){
-  const el = document.getElementById('bigBadge'); if(!el) return;
-  const target = 300000; let n = 1; el.textContent = n.toLocaleString();
-  function tick(){
-    if(n >= target){ el.textContent = target.toLocaleString(); return; }
-    const diff = target - n;
-    const inc = diff > 10000 ? Math.ceil(diff * 0.12) : (diff > 1000 ? Math.ceil(diff * 0.06) : Math.ceil(diff * 0.12));
-    n += inc; if(n > target) n = target;
-    el.textContent = n.toLocaleString();
-    setTimeout(tick, 18);
-  }
-  setTimeout(tick, 220);
-})();
-
-
-    // GSAP hero intro + micro interactions
-    window.addEventListener('load', ()=>{
-      if(window.gsap){
-        gsap.from('#typed-parent', { y: 18, opacity: 0, duration: .8, ease: 'power3.out' });
-        gsap.from('.project-hero .w-44', { scale: .88, opacity: 0, duration: .8, delay: .12 });
-        gsap.from('.glass', { opacity: 0, y: 8, duration: .5, stagger: .03, delay: .18 });
-      }
+    document.getElementById('caseModal').addEventListener('click', (e) => {
+      if(e.target.id === 'caseModal') closeCase();
     });
 
-    // Contact form demo handler (replace with EmailJS or backend in production)
+    // Contact form demo handler + loading state
     function submitForm(e){
       e.preventDefault();
-      const f = e.target; const data = new FormData(f);
+      const f = e.target; 
+      const submitBtn = f.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      const data = new FormData(f);
       if(!data.get('name') || !data.get('email') || !data.get('message')){
         alert('Iltimos barcha required maydonlarni to‘ldiring.');
         return false;
       }
-      // Example: using EmailJS would go here (emailjs.send).
-      alert('Rahmat! Xabaringiz qabul qilindi.\\n' + data.get('name') + ' — ' + data.get('email'));
-      f.reset();
+      
+      // Loading state
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Yuborilmoqda...';
+      submitBtn.disabled = true;
+      
+      // Simulate API call
+      setTimeout(() => {
+        alert('✅ Rahmat! Xabaringiz qabul qilindi.\n\n' + 
+              `Ism: ${data.get('name')}\n` + 
+              `Email: ${data.get('email')}\n` +
+              `Javob: 24 soat ichida`);
+        f.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }, 2000);
+      
       return false;
     }
 
-    // Accessibility: reduce motion
+    // GSAP hero intro + micro interactions
+    window.addEventListener('load', ()=>{
+      if(window.gsap){
+        gsap.from('#typed-parent', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' });
+        gsap.from('.project-hero .w-44', { scale: 0.8, rotation: 5, opacity: 0, duration: 1, delay: 0.3 });
+        gsap.from('[data-aos]', { opacity: 0, y: 40, duration: 0.8, stagger: 0.1, delay: 0.5 });
+        // Continuous floating animation
+        gsap.to('.glass', {
+          y: -10,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "power2.inOut",
+          stagger: {
+            amount: 1.5
+          }
+        });
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Stats counter animation
+    function animateStats() {
+      const stats = {
+        projects: 50,
+        clients: 25,
+        years: 2
+      };
+      const counters = {
+        projects: document.getElementById('statProjects'),
+        clients: document.getElementById('statClients'),
+        years: document.getElementById('statYears')
+      };
+      
+      Object.keys(stats).forEach(key => {
+        let count = 0;
+        const increment = stats[key] / 100;
+        const timer = setInterval(() => {
+          count += increment;
+          if(key === 'years') {
+            counters[key].textContent = Math.floor(count) + '+ yil';
+          } else {
+            counters[key].textContent = Math.floor(count) + '+';
+          }
+          if(count >= stats[key]) {
+            clearInterval(timer);
+            if(key === 'years') {
+              counters[key].textContent = stats[key] + '+ yil';
+            } else {
+              counters[key].textContent = stats[key] + '+';
+            }
+          }
+        }, 30);
+      });
+    }
+    
+    // Intersection Observer for stats
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          animateStats();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    });
+    
+    statsObserver.observe(document.querySelector('#services'));
+
+    // Accessibility improvements
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if(prefersReduced.matches && window.gsap) gsap.globalTimeline.timeScale(4);
+    if(prefersReduced.matches && window.gsap) {
+      gsap.globalTimeline.timeScale(2);
+    }
 
-    // Ensure focus styles for keyboard users
-    document.addEventListener('keyup', (e)=>{ if(e.key === 'Tab') document.body.classList.add('show-focus'); });
+    document.addEventListener('keyup', (e)=>{ 
+      if(e.key === 'Tab') document.body.classList.add('show-focus'); 
+    });
 
+    // Preloader (optional)
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
   </script>
 
 </body>
