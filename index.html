@@ -1,1611 +1,1359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Createx Online School - Professional Learning Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <style>
-        :root {
-            --primary: #00d4ff;
-            --primary-dark: #0099cc;
-            --dark: #000;
-            --darker: #111;
-            --card: #1a1a1a;
-            --text: #fff;
-            --text-muted: #aaa;
-            --success: #00ff88;
-            --warning: #ffaa00;
-        }
-
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            background: var(--dark); 
-            color: var(--text); 
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        a { 
-            text-decoration: none; 
-            color: inherit; 
-            transition: color 0.3s ease;
-        }
-
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-        }
-
-        /* HEADER */
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px 0; 
-            position: sticky; 
-            top: 0; 
-            background: rgba(0,0,0,0.95); 
-            backdrop-filter: blur(20px); 
-            z-index: 1000;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .header.scrolled { 
-            padding: 15px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-        }
-        
-        .logo { 
-            font-size: 32px; 
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .logo span { 
-            color: var(--primary); 
-            animation: glow 2s ease-in-out infinite alternate; 
-        }
-        
-        @keyframes glow { 
-            0% { 
-                text-shadow: 0 0 10px var(--primary); 
-            } 
-            100% { 
-                text-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary); 
-            } 
-        }
-        
-        .nav-menu { 
-            display: flex; 
-            gap: 32px; 
-            list-style: none; 
-        }
-        
-        .nav-item { 
-            cursor: pointer; 
-            position: relative;
-            transition: all 0.3s ease; 
-            padding: 10px 0;
-            font-weight: 500;
-        }
-        
-        .nav-item::after {
-            content: ''; 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 0; 
-            height: 2px; 
-            background: var(--primary); 
-            transition: width 0.3s ease;
-        }
-        
-        .nav-item:hover::after { 
-            width: 100%; 
-        }
-        
-        .nav-item:hover { 
-            color: var(--primary); 
-        }
-
-        .btn-primary { 
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark)); 
-            border: none; 
-            padding: 12px 30px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            font-weight: 600; 
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,212,255,0.3);
-            font-size: 15px;
-            color: var(--dark);
-        }
-        
-        .btn-primary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 10px 25px rgba(0,212,255,0.4); 
-        }
-
-        .user-auth { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-weight: 500; 
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        
-        .user-auth:hover { 
-            color: var(--primary); 
-        }
-
-        /* HERO */
-        .hero { 
-            text-align: center; 
-            padding: 120px 0 80px; 
-            background: linear-gradient(135deg, var(--darker) 0%, var(--card) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0,212,255,0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0,212,255,0.03) 0%, transparent 50%);
-        }
-        
-        .subtitle { 
-            font-size: 18px; 
-            letter-spacing: 5px; 
-            color: var(--primary); 
-            animation: slideInUp 1s ease;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .hero-title { 
-            font-size: 64px; 
-            font-weight: 800;
-            margin-top: 15px; 
-            animation: slideInUp 1s ease 0.2s both;
-            line-height: 1.1;
-            background: linear-gradient(45deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        @keyframes slideInUp { 
-            from { 
-                opacity: 0; 
-                transform: translateY(50px); 
-            } 
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            } 
-        }
-
-        /* FILTERS */
-        .filters { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 12px; 
-            align-items: center; 
-            margin: 0 0 60px;
-            justify-content: center;
-        }
-        
-        .filter-btn { 
-            background: var(--card); 
-            padding: 12px 25px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            border: 2px solid transparent;
-            white-space: nowrap;
-        }
-        
-        .filter-btn.active { 
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark)); 
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0,212,255,0.4);
-            color: var(--dark);
-            font-weight: 600;
-        }
-        
-        .filter-btn:hover { 
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-        
-        .search-input { 
-            padding: 15px 25px; 
-            border: 2px solid var(--card); 
-            border-radius: 50px; 
-            background: var(--card); 
-            width: 320px; 
-            color: var(--text); 
-            transition: all 0.3s ease;
-            font-size: 15px;
-        }
-        
-        .search-input:focus { 
-            outline: none; 
-            border-color: var(--primary); 
-            box-shadow: 0 0 20px rgba(0,212,255,0.2);
-        }
-
-        /* COURSE CARDS */
-        .courses-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 30px; 
-            margin-bottom: 80px; 
-        }
-        
-        .course-card { 
-            background: var(--card); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .course-card.animate { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-        
-        .course-card:hover { 
-            transform: translateY(-15px) scale(1.02); 
-            box-shadow: 0 25px 50px rgba(0,212,255,0.2);
-            border-color: var(--primary);
-        }
-        
-        .course-card::before {
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 4px; 
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--primary));
-            transform: scaleX(0); 
-            transition: transform 0.3s ease;
-        }
-        
-        .course-card:hover::before { 
-            transform: scaleX(1); 
-        }
-        
-        .course-image { 
-            width: 100%; 
-            height: 220px; 
-            object-fit: cover; 
-            transition: transform 0.4s ease;
-        }
-        
-        .course-card:hover .course-image { 
-            transform: scale(1.05); 
-        }
-        
-        .course-category { 
-            padding: 20px 25px 5px; 
-            font-size: 14px; 
-            color: #fff; 
-            display: inline-block; 
-            border-radius: 20px; 
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .course-title { 
-            padding: 0 25px 15px; 
-            font-size: 22px; 
-            line-height: 1.3;
-            transition: color 0.3s;
-            font-weight: 700;
-            min-height: 66px;
-        }
-        
-        .course-card:hover .course-title { 
-            color: var(--primary); 
-        }
-        
-        .course-meta { 
-            padding: 0 25px 25px; 
-            color: var(--text-muted); 
-            display: flex; 
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .course-price { 
-            color: var(--primary); 
-            font-weight: bold; 
-            font-size: 24px; 
-        }
-
-        .load-more { 
-            text-align: center; 
-            font-size: 18px; 
-            cursor: pointer; 
-            color: var(--primary); 
-            margin: 60px auto; 
-            padding: 15px 40px;
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-weight: 600;
-        }
-        
-        .load-more:hover { 
-            background: var(--primary); 
-            color: var(--dark); 
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0,212,255,0.3);
-        }
-
-        /* TESTIMONIALS */
-        .testimonials { 
-            text-align: center; 
-            padding: 100px 0; 
-            background: linear-gradient(135deg, var(--darker) 0%, var(--card) 100%);
-            border-radius: 30px; 
-            margin: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .testimonials::before {
-            content: ''; 
-            position: absolute; 
-            top: -50%; 
-            left: -50%; 
-            width: 200%; 
-            height: 200%;
-            background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float { 
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-            } 
-            50% { 
-                transform: translateY(-20px) rotate(180deg); 
-            } 
-        }
-        
-        .section-subtitle { 
-            color: var(--primary); 
-            letter-spacing: 4px; 
-            font-size: 18px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        
-        .section-title { 
-            font-size: 48px; 
-            margin-bottom: 25px; 
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        
-        .section-description { 
-            max-width: 800px; 
-            margin: 0 auto 50px; 
-            color: var(--text-muted); 
-            font-size: 18px; 
-            line-height: 1.6;
-        }
-        
-        .testimonial-content { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 20px;
-        }
-        
-        .testimonial-avatar { 
-            width: 100px; 
-            height: 100px; 
-            border-radius: 50%; 
-            border: 4px solid var(--primary); 
-            transition: all 0.3s ease;
-            object-fit: cover;
-        }
-        
-        .testimonial-avatar:hover { 
-            transform: scale(1.1) rotate(5deg); 
-        }
-        
-        .testimonial-name { 
-            font-size: 28px; 
-            margin-bottom: 5px; 
-            font-weight: 700;
-        }
-        
-        .testimonial-role { 
-            color: var(--text-muted); 
-            font-size: 16px; 
-        }
-
-        /* CERTIFICATE */
-        .certificates { 
-            text-align: center; 
-            padding: 100px 0; 
-            background: var(--card);
-            border-radius: 30px;
-            margin: 100px 0;
-        }
-        
-        .certificates-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 50px;
-        }
-        
-        .certificate-logo { 
-            height: 70px; 
-            filter: drop-shadow(0 10px 20px rgba(0,212,255,0.3));
-            transition: all 0.3s ease;
-        }
-        
-        .certificate-logo:hover { 
-            transform: translateY(-5px) scale(1.1); 
-            filter: drop-shadow(0 15px 30px rgba(0,212,255,0.5)); 
-        }
-
-        /* NEWSLETTER */
-        .newsletter { 
-            text-align: center; 
-            background: linear-gradient(135deg, var(--darker) 0%, var(--card) 100%);
-            padding: 80px 0; 
-            border-radius: 30px; 
-            margin: 100px 0;
-            position: relative;
-        }
-        
-        .newsletter::after {
-            content: ''; 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--primary));
-        }
-        
-        .subscribe-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .subscribe-input { 
-            padding: 18px 30px; 
-            border: 2px solid var(--card); 
-            border-radius: 50px; 
-            background: var(--card); 
-            color: var(--text); 
-            flex: 1;
-            min-width: 300px;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-        
-        .subscribe-input:focus { 
-            outline: none; 
-            border-color: var(--primary); 
-            box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
-        }
-
-        /* FOOTER */
-        footer { 
-            background: var(--darker); 
-            padding: 80px 0 40px; 
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .footer-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 40px; 
-            margin-bottom: 50px; 
-        }
-        
-        .footer-about h1 { 
-            margin-bottom: 20px; 
-        }
-        
-        .footer-about p { 
-            color: var(--text-muted); 
-            margin: 20px 0 30px; 
-            line-height: 1.7;
-        }
-        
-        .social-icons { 
-            display: flex; 
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .social-icon { 
-            width: 45px; 
-            height: 45px; 
-            background: var(--card); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: var(--text-muted);
-            font-size: 18px;
-        }
-        
-        .social-icon:hover { 
-            background: var(--primary); 
-            color: var(--dark); 
-            transform: translateY(-5px) rotate(10deg);
-            box-shadow: 0 10px 25px rgba(0,212,255,0.3);
-        }
-
-        .footer-column h3 { 
-            margin-bottom: 25px; 
-            color: var(--primary); 
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        .footer-column ul { 
-            list-style: none; 
-        }
-        
-        .footer-column li { 
-            margin-bottom: 12px; 
-            cursor: pointer; 
-            transition: all 0.3s ease;
-            padding: 5px 0;
-        }
-        
-        .footer-column li:hover { 
-            color: var(--primary); 
-            padding-left: 10px;
-        }
-        
-        .footer-contact i { 
-            color: var(--primary); 
-            margin-right: 10px; 
-            width: 20px;
-        }
-
-        .newsletter-subscribe h3 { 
-            color: var(--primary); 
-            margin-bottom: 20px; 
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .newsletter-subscribe input { 
-            width: 100%; 
-            padding: 15px 20px; 
-            background: var(--card); 
-            border: 2px solid var(--card); 
-            border-radius: 12px; 
-            color: var(--text); 
-            margin: 15px 0 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .newsletter-subscribe input:focus { 
-            outline: none; 
-            border-color: var(--primary); 
-            box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
-        }
-        
-        .newsletter-subscribe p { 
-            color: var(--text-muted); 
-            font-size: 14px; 
-            line-height: 1.5;
-        }
-
-        .footer-bottom { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-top: 1px solid rgba(255,255,255,0.1); 
-            padding-top: 30px; 
-            color: var(--text-muted);
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .scroll-top { 
-            cursor: pointer; 
-            color: var(--primary); 
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .scroll-top:hover { 
-            transform: translateY(-2px); 
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            background: linear-gradient(135deg, var(--card) 0%, var(--darker) 100%);
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-            animation: modalSlideIn 0.4s ease;
-            border: 1px solid rgba(0,212,255,0.2);
-        }
-        
-        @keyframes modalSlideIn { 
-            from { 
-                opacity: 0; 
-                transform: translateY(-50px) scale(0.9); 
-            } 
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            } 
-        }
-        
-        .modal-close { 
-            position: absolute; 
-            right: 20px; 
-            top: 20px; 
-            color: var(--primary); 
-            font-size: 30px; 
-            cursor: pointer;
-            transition: 0.3s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .modal-close:hover { 
-            background: rgba(0,212,255,0.1); 
-            transform: rotate(90deg); 
-        }
-
-        /* LOADING */
-        .loading { 
-            display: none; 
-            text-align: center; 
-            padding: 40px; 
-        }
-        
-        .spinner {
-            border: 3px solid var(--card);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin { 
-            0% { 
-                transform: rotate(0deg); 
-            } 
-            100% { 
-                transform: rotate(360deg); 
-            } 
-        }
-
-        /* NOTIFICATION */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: var(--dark);
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,212,255,0.3);
-            transform: translateX(400px);
-            transition: transform 0.4s ease;
-            z-index: 3000;
-            font-weight: 600;
-            max-width: 400px;
-            word-break: break-word;
-        }
-        
-        .notification.show { 
-            transform: translateX(0); 
-        }
-        
-        .notification.error {
-            background: linear-gradient(45deg, #ff4757, #ff3838);
-        }
-        
-        .notification.warning {
-            background: linear-gradient(45deg, #ffa502, #ff7f00);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .hero-title {
-                font-size: 48px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sherjonov Abduaziz — Premium Frontend Portfolio</title>
+  <meta name="description" content="Abduaziz Sherjonov — 2+ yillik tajribali Frontend Developer. HTML, CSS, JavaScript, Tailwind, SCSS, Bootstrap, React">
+  <meta property="og:title" content="Sherjonov Abduaziz — Frontend Developer">
+  <meta property="og:description" content="Professional veb interfeyslar yarataman. 50+ loyiha, 25+ mijoz.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons & Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            secondary: '#0EA5E9',
+            accent: '#F59E0B',
+            dark: '#071024',
+            'dark-card': '#0F172A'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'gradient': 'gradient 8s ease infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
             }
-            
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .courses-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
+          }
         }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 20px;
-                padding: 15px 0;
-            }
-            
-            .nav-menu {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero {
-                padding: 80px 0 60px;
-            }
-            
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .search-input {
-                width: 100%;
-                min-width: auto;
-            }
-            
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 30px;
-            }
-            
-            .subscribe-form {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .subscribe-input {
-                min-width: auto;
-                width: 100%;
-            }
-            
-            .social-icons {
-                justify-content: center;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 28px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .course-card {
-                margin: 0 10px;
-            }
-            
-            .certificates-logos {
-                flex-direction: column;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-                margin: 10% auto;
-            }
-        }
-
-        /* UTILITY CLASSES */
-        .gradient-text {
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-0 { margin-bottom: 0 !important; }
-        .mt-0 { margin-top: 0 !important; }
-    </style>
+      }
+    }
+  </script>
+  
+  <style>
+    :root {
+      --color-bg: #071024;
+      --color-card: #0F172A;
+      --color-text: #F1F5F9;
+      --color-text-muted: #94A3B8;
+      --color-primary: #6366F1;
+      --color-secondary: #0EA5E9;
+      --color-accent: #F59E0B;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #071024 0%, #0C1A3A 100%);
+      color: var(--color-text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.5);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+      border-radius: 5px;
+    }
+    
+    /* Glass Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+      background: rgba(99, 102, 241, 0.1);
+    }
+    
+    /* Project Badge */
+    .project-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(135deg, #F59E0B, #EC4899);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+      z-index: 10;
+    }
+    
+    /* Section Spacing */
+    section {
+      padding: 5rem 0;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Loading Animation */
+    .loading-bar {
+      height: 4px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      border-radius: 2px;
+      animation: loading 2s ease-in-out infinite;
+    }
+    
+    @keyframes loading {
+      0%, 100% { width: 0%; }
+      50% { width: 100%; }
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <!-- HEADER -->
-        <header class="header" id="header">
-            <h1 class="logo">CRATE<span>X</span></h1>
-            <ul class="nav-menu">
-                <li class="nav-item">About Us</li>
-                <li class="nav-item">Courses</li>
-                <li class="nav-item">Events</li>
-                <li class="nav-item">Blog</li>
-                <li class="nav-item">Contacts</li>
-            </ul>
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <button class="btn-primary" onclick="openModal()">Get Consultation</button>
-                <div class="user-auth" onclick="openLogin()">
-                    <i class="fa-solid fa-user"></i>
-                    Log in / Register
-                </div>
-            </div>
-        </header>
-
-        <!-- HERO -->
-        <section class="hero">
-            <h2 class="subtitle">ENJOY YOUR STUDYING</h2>
-            <h1 class="hero-title">Our online courses</h1>
-        </section>
-
-        <!-- FILTERS -->
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All<sup>17</sup></button>
-            <button class="filter-btn" data-filter="marketing">Marketing<sup>4</sup></button>
-            <button class="filter-btn" data-filter="management">Management<sup>5</sup></button>
-            <button class="filter-btn" data-filter="hr">HR & Recruiting<sup>5</sup></button>
-            <button class="filter-btn" data-filter="design">Design<sup>2</sup></button>
-            <button class="filter-btn" data-filter="development">Development<sup>3</sup></button>
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search course...">
-        </div>
-
-        <!-- COURSES -->
-        <div class="courses-grid" id="courseSection">
-            <!-- Courses will be dynamically added here -->
-        </div>
-
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Loading more courses...</p>
-        </div>
-
-        <div class="text-center">
-            <button class="load-more" onclick="loadMore()">
-                <i class="fa-solid fa-repeat"></i> Load More
-            </button>
-        </div>
-
-        <!-- TESTIMONIALS -->
-        <section class="testimonials">
-            <h2 class="section-subtitle">TESTIMONIALS</h2>
-            <h1 class="section-title">What our students say</h1>
-            <p class="section-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra 
-                mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi.
-            </p>
-            <div class="testimonial-content">
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Eleanor Pena" class="testimonial-avatar">
-                <h3 class="testimonial-name">Eleanor Pena</h3>
-                <p class="testimonial-role">Senior Product Designer, Google Ads Course</p>
-                <div class="stars">
-                    <i class="fa-solid fa-star" style="color: #ffd700;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffd700;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffd700;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffd700;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffd700;"></i>
-                </div>
-            </div>
-        </section>
-
-        <!-- CERTIFICATE -->
-        <section class="certificates">
-            <h2 class="section-subtitle">Createx Certificate</h2>
-            <h1 class="section-title">Your expertise will be confirmed</h1>
-            <p class="section-description mb-0">
-                We are accredited by international professional organizations and institutes:
-            </p>
-            <div class="certificates-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_TV_2015.png/200px-Logo_TV_2015.png" alt="Certificate 1" class="certificate-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/200px-Logo_of_Twitter.svg.png" alt="Certificate 2" class="certificate-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/200px-Apple_logo_black.svg.png" alt="Certificate 3" class="certificate-logo">
-            </div>
-        </section>
-
-        <!-- NEWSLETTER -->
-        <section class="newsletter">
-            <h2 class="section-subtitle">Don't miss anything</h2>
-            <h1 class="section-title">Subscribe to the Createx School announcements</h1>
-            <div class="subscribe-form">
-                <input type="email" class="subscribe-input" id="subscribeEmail" placeholder="Your Working Email">
-                <button class="btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <h1 class="logo">CREATE<span>X</span></h1>
-                    <p>
-                        Createx Online School is a leader in online studying. We have lots of courses 
-                        and programs from the main market experts. We provide relevant approaches to 
-                        online learning, internships and employment.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-telegram"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                  <h3>SITE MAP</h3>
-                  <ul>
-                      <li>About Us</li>
-                      <li>Courses</li>
-                      <li>Events</li>
-                      <li>Blog</li>
-                      <li>Contacts</li>
-                  </ul>
-              </div>
-              <div class="footer-column">
-                  <h3>COURSES</h3>
-                  <ul>
-                      <li>Marketing</li>
-                      <li>Management</li>
-                      <li>HR & Recruiting</li>
-                      <li>Design</li>
-                      <li>Development</li>
-                  </ul>
-              </div>
-              <div class="footer-column footer-contact">
-                  <h3>CONTACT US</h3>
-                  <ul>
-                      <li><i class="fa-solid fa-mobile"></i> (405) 555-0128</li>
-                      <li><i class="fa-solid fa-envelope"></i> hello@createx.com</li>
-                      <li><i class="fa-solid fa-map-marker-alt"></i> 4021 Sheridan Street, Washington, DC</li>
-                  </ul>
-              </div>
-              <div class="footer-column newsletter-subscribe">
-                  <h3>SIGN UP TO OUR NEWSLETTER</h3>
-                  <input type="email" id="footerEmail" placeholder="Email Address">
-                  <p>*Subscribe to our newsletter to receive communications and early updates</p>
-              </div>
-          </div>
-          <div class="footer-bottom">
-              <h4>© 2025 All rights reserved. Made with ❤️ by Createx Studio</h4>
-              <h4 class="scroll-top" onclick="scrollToTop()">
-                  <i class="fa-solid fa-arrow-up"></i> GO TO TOP
-              </h4>
-          </div>
-      </footer>
-  </div>
-
-  <!-- MODAL -->
-  <div id="modal" class="modal">
-      <div class="modal-content">
-          <span class="modal-close" onclick="closeModal()">&times;</span>
-          <i class="fa-solid fa-graduation-cap fa-3x" style="color: var(--primary); margin-bottom: 20px;"></i>
-          <h2 class="section-title" style="font-size: 32px;">Free Consultation</h2>
-          <p class="section-description" style="font-size: 16px;">
-              Schedule a free 30-minute consultation with our experts to discuss your learning goals 
-              and find the perfect course for you.
-          </p>
-          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-              <button class="btn-primary" onclick="bookConsultation()" style="padding: 12px 30px;">
-                  Book Now
-              </button>
-              <button onclick="closeModal()" style="background: transparent; color: var(--primary); padding: 12px 25px; border-radius: 25px; border: 2px solid var(--primary); cursor: pointer; font-weight: 600;">
-                  Later
-              </button>
-          </div>
+<body class="font-inter">
+  <!-- Preloader -->
+  <div id="preloader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-dark">
+    <div class="relative">
+      <div class="w-24 h-24 rounded-full border-4 border-transparent border-t-primary border-r-secondary animate-spin"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-2xl font-bold gradient-text">SA</div>
       </div>
+    </div>
+    <div class="mt-8 w-64">
+      <div class="loading-bar"></div>
+    </div>
   </div>
 
-  <!-- NOTIFICATION -->
-  <div id="notification" class="notification"></div>
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 py-4 transition-all duration-300 glass">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="flex items-center space-x-3 group">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <span class="text-white font-bold text-xl">SA</span>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold group-hover:text-primary transition-colors">Sherjonov Abduaziz</h1>
+            <p class="text-sm text-text-muted">Frontend Developer</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-sm font-medium hover:text-primary transition-colors">Bosh Sahifa</a>
+          <a href="#about" class="text-sm font-medium hover:text-primary transition-colors">Men haqimda</a>
+          <a href="#projects" class="text-sm font-medium hover:text-primary transition-colors">Loyihalar</a>
+          <a href="#skills" class="text-sm font-medium hover:text-primary transition-colors">Ko'nikmalar</a>
+          <a href="#contact" class="text-sm font-medium hover:text-primary transition-colors">Aloqa</a>
+          
+          <!-- Theme Toggle -->
+          <button id="themeToggle" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+            <i class="fas fa-moon text-yellow-400"></i>
+          </button>
+          
+          <!-- Language Toggle -->
+          <button id="languageToggle" class="px-4 py-2 rounded-lg glass text-sm font-medium hover:text-primary transition-colors">
+            <i class="fas fa-globe mr-2"></i>UZ
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuButton" class="md:hidden w-10 h-10 rounded-lg glass flex items-center justify-center">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-30 bg-dark/95 backdrop-blur-sm hidden md:hidden">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex justify-end mb-8">
+        <button id="closeMobileMenu" class="w-10 h-10 rounded-lg glass flex items-center justify-center">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="flex flex-col space-y-6">
+        <a href="#home" class="text-2xl font-bold hover:text-primary transition-colors py-2">Bosh Sahifa</a>
+        <a href="#about" class="text-2xl font-bold hover:text-primary transition-colors py-2">Men haqimda</a>
+        <a href="#projects" class="text-2xl font-bold hover:text-primary transition-colors py-2">Loyihalar</a>
+        <a href="#skills" class="text-2xl font-bold hover:text-primary transition-colors py-2">Ko'nikmalar</a>
+        <a href="#contact" class="text-2xl font-bold hover:text-primary transition-colors py-2">Aloqa</a>
+        <div class="flex items-center space-x-4 pt-8">
+          <button id="mobileThemeToggle" class="flex-1 py-3 rounded-lg glass">
+            <i class="fas fa-moon mr-2"></i>Tema
+          </button>
+          <button id="mobileLanguageToggle" class="flex-1 py-3 rounded-lg glass">
+            <i class="fas fa-globe mr-2"></i>Til
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative pt-24 pb-20 md:pt-32 md:pb-28">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div>
+          <div class="inline-flex items-center px-4 py-2 rounded-full glass mb-6">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse mr-2"></span>
+            <span class="text-sm">Mavjud: Loyihalar uchun</span>
+          </div>
+          
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            <span class="block">Men</span>
+            <span class="gradient-text" id="typedText"></span>
+          </h1>
+          
+          <p class="text-lg text-text-muted mb-8 max-w-xl">
+            2+ yillik tajribaga ega Frontend Developer. Zamonaviy, tezkor va foydalanuvchi uchun qulay veb interfeyslar yarataman. Har bir loyihada kod sifati va perfomansga alohida e'tibor qarataman.
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+            <a href="#projects" class="btn-primary inline-flex items-center">
+              <span>Loyihalarni ko'rish</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <a href="#contact" class="btn-secondary inline-flex items-center">
+              <i class="fas fa-paper-plane mr-2"></i>
+              <span>Bog'lanish</span>
+            </a>
+          </div>
+          
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-6 mt-12">
+            <div>
+              <div class="text-3xl font-bold gradient-text mb-2" data-count="50">0</div>
+              <div class="text-sm text-text-muted">Bajargan loyihalar</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold gradient-text mb-2" data-count="25">0</div>
+              <div class="text-sm text-text-muted">Mamnun mijozlar</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold gradient-text mb-2" data-count="2">0</div>
+              <div class="text-sm text-text-muted">Yillik tajriba</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Content - 3D Profile -->
+        <div class="relative">
+          <div class="relative glass rounded-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div class="relative z-10">
+              <div class="w-full aspect-square rounded-xl overflow-hidden mb-6">
+                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
+                      <span class="text-4xl font-bold text-white">SA</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">Sherjonov Abduaziz</h3>
+                    <p class="text-text-muted">Frontend Developer</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div class="text-center p-4 rounded-lg bg-dark-card">
+                  <div class="text-2xl font-bold text-primary">100%</div>
+                  <div class="text-sm text-text-muted">Topshiriq</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-dark-card">
+                  <div class="text-2xl font-bold text-secondary">24/7</div>
+                  <div class="text-sm text-text-muted">Qo'llab-quvvat</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-primary/10 animate-float"></div>
+            <div class="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-secondary/10 animate-float" style="animation-delay: 2s"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="bg-dark-card/50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Portfolio Loyihalar</h2>
+        <p class="text-text-muted max-w-2xl mx-auto">Har bir loyiha o'ziga xos texnologiyalar va yechimlar bilan yaratilgan</p>
+      </div>
+
+      <!-- Project Filter -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button class="filter-btn active px-5 py-2 rounded-full glass hover:bg-primary/20 transition-all" data-filter="all">Barchasi</button>
+        <button class="filter-btn px-5 py-2 rounded-full glass hover:bg-primary/20 transition-all" data-filter="web">Veb Saytlar</button>
+        <button class="filter-btn px-5 py-2 rounded-full glass hover:bg-primary/20 transition-all" data-filter="app">Web App</button>
+        <button class="filter-btn px-5 py-2 rounded-full glass hover:bg-primary/20 transition-all" data-filter="ecommerce">E-commerce</button>
+        <button class="filter-btn px-5 py-2 rounded-full glass hover:bg-primary/20 transition-all" data-filter="landing">Landing</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsContainer">
+        
+        <!-- Project 1: TechPro Task Manager -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="web app">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-blue-500/20 to-cyan-500/20"></div>
+            <div class="project-badge">LIVE</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="https://techprosite1.netlify.app/" target="_blank" class="btn-primary">
+                <i class="fas fa-external-link-alt mr-2"></i>Demo'ni ko'rish
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">TechPro Task Manager</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-blue-500/20 text-blue-400">Web App</span>
+            </div>
+            <p class="text-text-muted mb-4">To'liq funksional vazifa boshqaruv tizimi. Drag & drop, localStorage, va real-time updates.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">HTML/CSS</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">JavaScript</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Tailwind</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">LocalStorage</span>
+            </div>
+            <button onclick="openProjectModal(1)" class="w-full py-3 rounded-lg border border-white/10 hover:border-primary/50 transition-colors text-sm font-medium">
+              <i class="fas fa-eye mr-2"></i>Batafsil ma'lumot
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 2: Modern Landing -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="landing">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20"></div>
+            <div class="project-badge">LIVE</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="https://malumotli-site.netlify.app/" target="_blank" class="btn-primary">
+                <i class="fas fa-external-link-alt mr-2"></i>Demo'ni ko'rish
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">Modern Landing Page</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-400">Landing</span>
+            </div>
+            <p class="text-text-muted mb-4">Zamonaviy marketing landing page. AOS animatsiyalar, smooth scroll, va mukammal responsive dizayn.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">HTML5</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">CSS3</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">JavaScript</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">AOS.js</span>
+            </div>
+            <button onclick="openProjectModal(2)" class="w-full py-3 rounded-lg border border-white/10 hover:border-primary/50 transition-colors text-sm font-medium">
+              <i class="fas fa-eye mr-2"></i>Batafsil ma'lumot
+            </button>
+          </div>
+        </div>
+
+        <!-- ✅ PROJECT 3: CREATE X ONLINE SCHOOL -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="web app">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-4xl font-bold text-white mb-2">CREATE<span class="text-cyan-400">X</span></div>
+                <p class="text-sm opacity-80">Online Learning Platform</p>
+              </div>
+            </div>
+            <div class="project-badge" style="background:linear-gradient(135deg,#00d4ff,#0099cc)">POPULAR</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="https://httpsmyportpolionetlifyapp.netlify.app/" target="_blank" class="btn-primary">
+                <i class="fas fa-external-link-alt mr-2"></i>Demo'ni ko'rish
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">Createx Online School</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400">Premium</span>
+            </div>
+            <p class="text-text-muted mb-4">Professional online kurslar platformasi. Kurslarni filterlash, izlash, modal windows va real-time interaktiv.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">HTML5</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">CSS3</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Vanilla JS</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Intersection</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Netlify</span>
+            </div>
+            <button onclick="openProjectModal(3)" class="w-full py-3 rounded-lg border border-white/10 hover:border-cyan-500/50 transition-colors text-sm font-medium">
+              <i class="fas fa-graduation-cap mr-2"></i>Case Study'ni ko'rish
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 4: E-commerce Dashboard -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="ecommerce">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-green-500/20 to-emerald-500/20"></div>
+            <div class="project-badge">NEW</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="#" class="btn-primary">
+                <i class="fas fa-external-link-alt mr-2"></i>Tez kunda
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">ShopDash E-commerce</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-400">Dashboard</span>
+            </div>
+            <p class="text-text-muted mb-4">Online do'kon uchun admin paneli. Mahsulotlar boshqaruvi, buyurtmalar va foydalanuvchilar.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">React</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">TypeScript</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Tailwind</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Chart.js</span>
+            </div>
+            <button onclick="openProjectModal(4)" class="w-full py-3 rounded-lg border border-white/10 hover:border-primary/50 transition-colors text-sm font-medium">
+              <i class="fas fa-eye mr-2"></i>Batafsil ma'lumot
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 5: Portfolio Template -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="web">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-orange-500/20 to-red-500/20"></div>
+            <div class="project-badge">FREE</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="#" class="btn-primary">
+                <i class="fas fa-download mr-2"></i>Yuklab olish
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">Portfolio Template</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-orange-500/20 text-orange-400">Template</span>
+            </div>
+            <p class="text-text-muted mb-4">Freelancerlar uchun bepul portfolio shablon. Responsive, dark/light theme va animatsiyalar.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">HTML</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">CSS</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">GSAP</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Responsive</span>
+            </div>
+            <button onclick="openProjectModal(5)" class="w-full py-3 rounded-lg border border-white/10 hover:border-primary/50 transition-colors text-sm font-medium">
+              <i class="fas fa-eye mr-2"></i>Batafsil ma'lumot
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 6: Real-time Chat App -->
+        <div class="project-card glass rounded-2xl overflow-hidden group" data-category="app">
+          <div class="relative overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20"></div>
+            <div class="project-badge">API</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <a href="#" class="btn-primary">
+                <i class="fas fa-code mr-2"></i>Kodni ko'rish
+              </a>
+            </div>
+          </div>
+          
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">ChatWave Messenger</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-violet-500/20 text-violet-400">Real-time</span>
+            </div>
+            <p class="text-text-muted mb-4">Real-time chat ilovasi. Socket.io, media yuborish, guruh chatlari va end-to-end encryption.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Node.js</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Socket.io</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">React</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-dark-card">MongoDB</span>
+            </div>
+            <button onclick="openProjectModal(6)" class="w-full py-3 rounded-lg border border-white/10 hover:border-primary/50 transition-colors text-sm font-medium">
+              <i class="fas fa-eye mr-2"></i>Batafsil ma'lumot
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- ============================= -->
+<!-- PHONESHOP 2025 REGISTER CARD -->
+<!-- Portfolio'ngizga qo'shishingiz uchun -->
+<!-- ============================= -->
+
+<!-- 1. HTML QISMI (Portfolio'ngizdagi projectsContainer ichiga qo'shing) -->
+<article class="project-card glass rounded-2xl overflow-hidden group mt-5" data-category="web">
+  <div class="relative overflow-hidden">
+    <!-- Orqa fon rangi -->
+    <div class="h-48 bg-gradient-to-br from-violet-600/30 to-fuchsia-600/30 flex items-center justify-center">
+      <div class="text-center">
+        <div class="text-5xl font-bold text-white mb-2">📱</div>
+        <p class="text-xl font-semibold opacity-90">PhoneShop 2025</p>
+        <p class="text-sm opacity-75 mt-1">Ro'yxatdan o'tish forması</p>
+      </div>
+    </div>
+    <!-- "LIVE" yorlig'i -->
+    <div class="project-badge" style="background:linear-gradient(135deg, #8B5CF6, #D946EF)">LIVE</div>
+    <!-- Hover qilinganda ko'rinadigan demo tugmasi -->
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+      <a href="https://gilded-kashata-8f0668.netlify.app/index.html" target="_blank" class="btn-primary">
+        <i class="fas fa-external-link-alt mr-2"></i> Demo'ni ko'rish
+      </a>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex items-start justify-between mb-4">
+      <h3 class="text-xl font-bold group-hover:text-purple-400 transition-colors">PhoneShop 2025 - Ro'yxatdan o'tish</h3>
+      <span class="text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-400">Form & Validation</span>
+    </div>
+    <p class="text-text-muted mb-4">Telefon do'koni uchun modern ro'yxatdan o'tish forması. JavaScript yordamida real vaqtda ma'lumotlarni tekshirish (validation) qiladi.</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="text-xs px-3 py-1 rounded-full bg-dark-card">HTML5 Form</span>
+      <span class="text-xs px-3 py-1 rounded-full bg-dark-card">CSS3 Flexbox</span>
+      <span class="text-xs px-3 py-1 rounded-full bg-dark-card">JavaScript</span>
+      <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Real-time Validation</span>
+      <span class="text-xs px-3 py-1 rounded-full bg-dark-card">Responsive</span>
+    </div>
+    <!-- "Batafsil ma'lumot" tugmasi uchun Modal-ni ochish -->
+    <button onclick="openProjectModal('phoneshop')" class="w-full py-3 rounded-lg border border-white/10 hover:border-purple-500/50 transition-colors text-sm font-medium">
+      <i class="fas fa-eye mr-2"></i> Loyiha tafsilotlari
+    </button>
+  </div>
+</article>
+
+      <!-- View More Button -->
+      <div class="text-center mt-12">
+        <a href="#contact" class="btn-primary inline-flex items-center px-8 py-4 text-lg">
+          <i class="fas fa-rocket mr-3"></i>
+          <span>Loyihangizni boshlaymizmi?</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Texnik Ko'nikmalar</h2>
+        <p class="text-text-muted max-w-2xl mx-auto">Har bir texnologiyani chuqur o'rganib, real loyihalarda qo'llayman</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Skill 1 -->
+        <div class="glass p-6 rounded-2xl text-center group hover:scale-105 transition-transform">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center mb-4 group-hover:from-blue-500/30 group-hover:to-blue-600/30 transition-all">
+            <i class="fab fa-html5 text-4xl text-blue-500"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">HTML5 & CSS3</h3>
+          <p class="text-text-muted text-sm mb-4">Semantik HTML, CSS Grid, Flexbox, Animations</p>
+          <div class="w-full bg-dark-card rounded-full h-2">
+            <div class="h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full w-full"></div>
+          </div>
+          <div class="text-right mt-2 text-sm text-blue-400 font-bold">100%</div>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="glass p-6 rounded-2xl text-center group hover:scale-105 transition-transform">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 flex items-center justify-center mb-4 group-hover:from-yellow-500/30 group-hover:to-yellow-600/30 transition-all">
+            <i class="fab fa-js text-4xl text-yellow-500"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">JavaScript</h3>
+          <p class="text-text-muted text-sm mb-4">ES6+, DOM, APIs, Async, OOP, Functional</p>
+          <div class="w-full bg-dark-card rounded-full h-2">
+            <div class="h-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full w-[90%]"></div>
+          </div>
+          <div class="text-right mt-2 text-sm text-yellow-400 font-bold">90%</div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="glass p-6 rounded-2xl text-center group hover:scale-105 transition-transform">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mb-4 group-hover:from-cyan-500/30 group-hover:to-cyan-600/30 transition-all">
+            <i class="fab fa-css3-alt text-4xl text-cyan-500"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Tailwind & SCSS</h3>
+          <p class="text-text-muted text-sm mb-4">Utility-first, Responsive, BEM, Mixins, Variables</p>
+          <div class="w-full bg-dark-card rounded-full h-2">
+            <div class="h-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full w-[95%]"></div>
+          </div>
+          <div class="text-right mt-2 text-sm text-cyan-400 font-bold">95%</div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="glass p-6 rounded-2xl text-center group hover:scale-105 transition-transform">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center mb-4 group-hover:from-purple-500/30 group-hover:to-purple-600/30 transition-all">
+            <i class="fab fa-react text-4xl text-purple-500"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Bootstrap</h3>
+          <p class="text-text-muted text-sm mb-4">STYLE, SCSS, JS, PYTHON, HTMgit</p>
+          <div class="w-full bg-dark-card rounded-full h-2">
+            <div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-[85%]"></div>
+          </div>
+          <div class="text-right mt-2 text-sm text-purple-400 font-bold">85%</div>
+        </div>
+      </div>
+
+      <!-- Additional Skills -->
+      <div class="mt-12 glass p-8 rounded-2xl">
+        <h3 class="text-2xl font-bold mb-6 text-center">Qo'shimcha Texnologiyalar</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="text-center p-4 rounded-xl bg-dark-card/50 hover:bg-primary/10 transition-colors">
+            <i class="fab fa-bootstrap text-3xl text-purple-500 mb-2"></i>
+            <div class="text-sm font-medium">Bootstrap 5</div>
+          </div>
+          <div class="text-center p-4 rounded-xl bg-dark-card/50 hover:bg-green-500/10 transition-colors">
+            <i class="fab fa-git-alt text-3xl text-orange-500 mb-2"></i>
+            <div class="text-sm font-medium">Git & GitHub</div>
+          </div>
+
+          <div class="text-center p-4 rounded-xl bg-dark-card/50 hover:bg-cyan-500/10 transition-colors">
+            <i class="fas fa-mobile-alt text-3xl text-green-500 mb-2"></i>
+            <div class="text-sm font-medium">Responsive</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-dark-card/30 py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Mijozlar Fikrlari</h2>
+        <p class="text-text-muted max-w-2xl mx-auto">Har bir loyiha hamkorlik va ishonch asosida bajariladi</p>
+      </div>
+
+      <div class="swiper testimonialSwiper">
+        <div class="swiper-wrapper">
+          
+          <!-- Testimonial 1 -->
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl max-w-2xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 p-0.5">
+                  <div class="w-full h-full rounded-full bg-dark flex items-center justify-center">
+                    <span class="text-xl font-bold">AV</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-xl font-bold">Ali Valiyev</h4>
+                  <p class="text-text-muted">TechPro CEO</p>
+                </div>
+              </div>
+              <div class="text-yellow-400 mb-4">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="text-lg italic text-text-muted">
+                "Abduaziz bilan ishlash juda qulay. TechPro loyihasini vaqtida va mukammal bajarib berdi. Kod sifati va dokumentatsiya ajoyib."
+              </p>
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <span class="text-sm px-3 py-1 rounded-full bg-blue-500/20 text-blue-400">Loyiha: TechPro Task Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl max-w-2xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-0.5">
+                  <div class="w-full h-full rounded-full bg-dark flex items-center justify-center">
+                    <span class="text-xl font-bold">DX</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-xl font-bold">Dildora Xolmatova</h4>
+                  <p class="text-text-muted">Marketing Manager</p>
+                </div>
+              </div>
+              <div class="text-yellow-400 mb-4">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="text-lg italic text-text-muted">
+                "Modern Landing loyihasi aynan biz kutganday chiqdi. Responsive dizayn, tez yuklanish va SEO optimallashtirish juda yaxshi bajarilgan."
+              </p>
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <span class="text-sm px-3 py-1 rounded-full bg-purple-500/20 text-purple-400">Loyiha: Modern Landing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3: CREATE X -->
+          <div class="swiper-slide">
+            <div class="glass p-8 rounded-2xl max-w-2xl mx-auto">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 p-0.5">
+                  <div class="w-full h-full rounded-full bg-dark flex items-center justify-center">
+                    <span class="text-xl font-bold">SQ</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-xl font-bold">Sardor Qodirov</h4>
+                  <p class="text-text-muted">Createx Founder</p>
+                </div>
+              </div>
+              <div class="text-yellow-400 mb-4">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="text-lg italic text-text-muted">
+                "Createx Online School loyihasi portfolio'ning eng yaxshi ishi. JavaScript interaktivligi, filterlash tizimi va animatsiyalar professional darajada."
+              </p>
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <span class="text-sm px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400">Loyiha: Createx Online School</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination mt-8"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Bog'laning</h2>
+        <p class="text-text-muted max-w-2xl mx-auto">Loyihangiz haqida gaplashamiz. 24 soat ichida javob beraman</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div>
+          <div class="glass p-8 rounded-2xl mb-8">
+            <h3 class="text-2xl font-bold mb-6">Aloqa ma'lumotlari</h3>
+            
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mr-4">
+                  <i class="fas fa-envelope text-blue-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Email</h4>
+                  <a href="mailto:abduazizsherjonov357@gmail.com" class="text-text-muted hover:text-primary transition-colors">
+                    abduazizsherjonov357@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mr-4">
+                  <i class="fab fa-telegram text-cyan-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Telegram</h4>
+                  <a href="https://t.me/Sherjonov011" target="_blank" class="text-text-muted hover:text-cyan-400 transition-colors">
+                    @Sherjonov011
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mr-4">
+                  <i class="fas fa-clock text-green-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Ish vaqti</h4>
+                  <p class="text-text-muted">Dushanba - Juma: 9:00 - 18:00</p>
+                  <p class="text-sm text-text-muted">Javob vaqti: 24 soat ichida</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="glass p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold mb-6">Ijtimoiy tarmoqlar</h3>
+            <div class="flex space-x-4">
+              <a href="https://github.com/Sherjonov" target="_blank" class="w-14 h-14 rounded-xl bg-dark-card flex items-center justify-center hover:bg-primary/20 transition-colors group">
+                <i class="fab fa-github text-2xl group-hover:text-white transition-colors"></i>
+              </a>
+              <a href="https://t.me/Sherjonov011" target="_blank" class="w-14 h-14 rounded-xl bg-dark-card flex items-center justify-center hover:bg-cyan-500/20 transition-colors group">
+                <i class="fab fa-telegram text-2xl group-hover:text-cyan-400 transition-colors"></i>
+              </a>
+              <a href="#" class="w-14 h-14 rounded-xl bg-dark-card flex items-center justify-center hover:bg-blue-500/20 transition-colors group">
+                <i class="fab fa-linkedin text-2xl group-hover:text-blue-400 transition-colors"></i>
+              </a>
+              <a href="#" class="w-14 h-14 rounded-xl bg-dark-card flex items-center justify-center hover:bg-pink-500/20 transition-colors group">
+                <i class="fab fa-instagram text-2xl group-hover:text-pink-400 transition-colors"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="glass p-8 rounded-2xl">
+          <form id="contactForm" class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium mb-2">Ismingiz</label>
+              <input type="text" name="name" required 
+                     class="w-full px-4 py-3 rounded-xl bg-dark-card border border-white/10 focus:border-primary/50 focus:outline-none transition-colors">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Email manzilingiz</label>
+              <input type="email" name="email" required 
+                     class="w-full px-4 py-3 rounded-xl bg-dark-card border border-white/10 focus:border-primary/50 focus:outline-none transition-colors">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Loyiha turi</label>
+              <select name="project_type" class="w-full px-4 py-3 rounded-xl bg-dark-card border border-white/10 focus:border-primary/50 focus:outline-none transition-colors">
+                <option value="">Tanlang</option>
+                <option value="landing">Landing Page</option>
+                <option value="webapp">Web Application</option>
+                <option value="ecommerce">E-commerce</option>
+                <option value="portfolio">Portfolio</option>
+                <option value="other">Boshqa</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Xabar</label>
+              <textarea name="message" rows="5" required 
+                        class="w-full px-4 py-3 rounded-xl bg-dark-card border border-white/10 focus:border-primary/50 focus:outline-none transition-colors resize-none"></textarea>
+            </div>
+
+            <div class="flex items-center">
+              <input type="checkbox" id="newsletter" class="w-4 h-4 rounded bg-dark-card border-white/10">
+              <label for="newsletter" class="ml-2 text-sm text-text-muted">
+                Yangiliklar va maxsus takliflar haqida xabardor bo'lishni istayman
+              </label>
+            </div>
+
+            <button type="submit" class="w-full btn-primary py-4 rounded-xl text-lg font-bold">
+              <span id="submitText">Xabarni yuborish</span>
+              <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Modal -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass rounded-2xl">
+      <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 transition-colors z-10">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div id="modalContent">
+        <!-- Content will be loaded dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-white/10">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <span class="text-white font-bold">SA</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold">Sherjonov Abduaziz</h3>
+              <p class="text-sm text-text-muted">Premium Frontend Developer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mb-4 md:mb-0">
+          <p class="text-text-muted">© 2024 Barcha huquqlar himoyalangan</p>
+          <p class="text-sm text-text-muted mt-1">HTML • CSS • JavaScript • Tailwind • SCSS • Bootstrap</p>
+        </div>
+
+        <div>
+          <a href="#home" class="btn-secondary inline-flex items-center">
+            <i class="fas fa-arrow-up mr-2"></i>
+            Yuqoriga
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <script>
-      // INITIAL COURSE DATA
-      const courseData = [
-          {
-              id: 1,
-              title: "The Ultimate Google Ads Training Course",
-              category: "marketing",
-              price: "$100",
-              instructor: "Jerome Bell",
-              image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=350&h=220&fit=crop",
-              description: "Master Google Ads from beginner to advanced level"
-          },
-          {
-              id: 2,
-              title: "Product Management Fundamentals",
-              category: "management",
-              price: "$480",
-              instructor: "Marvin McKinney",
-              image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=350&h=220&fit=crop",
-              description: "Learn the core principles of product management"
-          },
-          {
-              id: 3,
-              title: "HR Management and Analytics",
-              category: "hr",
-              price: "$200",
-              instructor: "Leslie Alexander Li",
-              image: "https://images.unsplash.com/photo-1551836026-d5c2c5af78e4?w=350&h=220&fit=crop",
-              description: "Modern HR practices with data analytics"
-          },
-          {
-              id: 4,
-              title: "Brand Management & PR Communications",
-              category: "marketing",
-              price: "$530",
-              instructor: "Kristin Watson",
-              image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=350&h=220&fit=crop",
-              description: "Build and maintain strong brand identity"
-          },
-          {
-              id: 5,
-              title: "Graphic Design Basic",
-              category: "design",
-              price: "$500",
-              instructor: "Guy Hawkins",
-              image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=350&h=220&fit=crop",
-              description: "Fundamentals of graphic design for beginners"
-          },
-          {
-              id: 6,
-              title: "Business Development Management",
-              category: "management",
-              price: "$400",
-              instructor: "Dianne Russell",
-              image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=350&h=220&fit=crop",
-              description: "Strategies for business growth and development"
-          },
-          {
-              id: 7,
-              title: "Highload Software Architecture",
-              category: "development",
-              price: "FREE",
-              instructor: "Brooklyn Simmons",
-              image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=350&h=220&fit=crop",
-              description: "Design scalable software systems"
-          },
-          {
-              id: 8,
-              title: "Human Resources – Selection and Recruitment",
-              category: "hr",
-              price: "$150",
-              instructor: "Kathryn Murphy",
-              image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=350&h=220&fit=crop",
-              description: "Modern recruitment and selection techniques"
-          },
-          {
-              id: 9,
-              title: "User Experience. Human-centered Design",
-              category: "design",
-              price: "$240",
-              instructor: "Cody Fisher",
-              image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=350&h=220&fit=crop",
-              description: "Create intuitive user experiences"
-          }
-      ];
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
 
-      // ADDITIONAL COURSES FOR LOAD MORE
-      const additionalCourses = [
-          {
-              id: 10,
-              title: "Advanced SEO & Content Marketing",
-              category: "marketing",
-              price: "$350",
-              instructor: "Samantha Wilson",
-              image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=350&h=220&fit=crop",
-              description: "Advanced SEO strategies and content marketing"
-          },
-          {
-              id: 11,
-              title: "Agile Project Management",
-              category: "management",
-              price: "$420",
-              instructor: "James Anderson",
-              image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=350&h=220&fit=crop",
-              description: "Master Agile methodologies for project management"
-          },
-          {
-              id: 12,
-              title: "Full Stack JavaScript Development",
-              category: "development",
-              price: "$600",
-              instructor: "Emily Chen",
-              image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=350&h=220&fit=crop",
-              description: "Become a full-stack JavaScript developer"
-          }
-      ];
+    // Initialize Swiper
+    const testimonialSwiper = new Swiper('.testimonialSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 2,
+        }
+      }
+    });
 
-      // STATE MANAGEMENT
-      let state = {
-          currentFilter: 'all',
-          searchQuery: '',
-          loadedCourses: 9,
-          allCourses: [...courseData],
-          isLoading: false,
-          canLoadMore: true
-      };
+    // Typed.js Initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide preloader
+      setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('preloader').style.display = 'none';
+        }, 500);
+      }, 1500);
 
-      // DOM ELEMENTS CACHE
-      const elements = {
-          header: document.getElementById('header'),
-          courseSection: document.getElementById('courseSection'),
-          modal: document.getElementById('modal'),
-          searchInput: document.getElementById('searchInput'),
-          subscribeEmail: document.getElementById('subscribeEmail'),
-          footerEmail: document.getElementById('footerEmail'),
-          loadMoreBtn: document.querySelector('.load-more'),
-          loading: document.getElementById('loading'),
-          notification: document.getElementById('notification'),
-          filterButtons: document.querySelectorAll('.filter-btn')
-      };
-
-      // INITIALIZATION
-      document.addEventListener('DOMContentLoaded', () => {
-          initializeApp();
+      // Typed text
+      new Typed('#typedText', {
+        strings: [
+          'Frontend Developerman',
+          'JavaScript Expertiman',
+          'UI/UX Designer',
+          'Problem Solver'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true
       });
 
-      function initializeApp() {
-          // Render initial courses
-          renderCourses(courseData);
-          
-          // Setup event listeners
-          setupEventListeners();
-          
-          // Initialize animations
-          initAnimations();
-          
-          // Show welcome notification
-          setTimeout(() => {
-              showNotification('Welcome to Createx! 🎓 Explore our courses', 'success');
-          }, 1000);
-      }
-
-      function setupEventListeners() {
-          // Header scroll effect
-          let scrollTimeout;
-          window.addEventListener('scroll', () => {
-              if (scrollTimeout) return;
-              scrollTimeout = setTimeout(() => {
-                  elements.header.classList.toggle('scrolled', window.scrollY > 100);
-                  scrollTimeout = null;
-              }, 50);
-          });
-
-          // Filter buttons
-          elements.filterButtons.forEach(button => {
-              button.addEventListener('click', () => {
-                  const filter = button.dataset.filter;
-                  applyFilter(filter);
-              });
-          });
-
-          // Search input
-          elements.searchInput.addEventListener('input', debounce((e) => {
-              state.searchQuery = e.target.value.toLowerCase();
-              filterAndRenderCourses();
-          }, 300));
-
-          // Enter key for email inputs
-          elements.subscribeEmail.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') subscribeNewsletter();
-          });
-
-          elements.footerEmail.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') subscribeNewsletter();
-          });
-
-          // Modal close on outside click
-          window.addEventListener('click', (e) => {
-              if (e.target === elements.modal) closeModal();
-          });
-
-          // Escape key to close modal
-          document.addEventListener('keydown', (e) => {
-              if (e.key === 'Escape') closeModal();
-          });
-      }
-
-      function initAnimations() {
-          // Intersection Observer for course cards
-          const observerOptions = {
-              threshold: 0.1,
-              rootMargin: '0px 0px -50px 0px'
-          };
-
-          const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      entry.target.classList.add('animate');
-                  }
-              });
-          }, observerOptions);
-
-          // Observe existing cards
-          document.querySelectorAll('.course-card').forEach(card => {
-              observer.observe(card);
-          });
-      }
-
-      function renderCourses(courses) {
-          elements.courseSection.innerHTML = '';
-          
-          courses.forEach(course => {
-              const categoryColors = {
-                  marketing: 'linear-gradient(45deg, #667eea, #764ba2)',
-                  management: 'linear-gradient(45deg, #4facfe, #00f2fe)',
-                  hr: 'linear-gradient(45deg, #fa709a, #fee140)',
-                  design: 'linear-gradient(45deg, #ffecd2, #fcb69f)',
-                  development: 'linear-gradient(45deg, #667eea, #764ba2)'
-              };
-
-              const courseElement = document.createElement('div');
-              courseElement.className = 'course-card';
-              courseElement.dataset.category = course.category;
-              courseElement.innerHTML = `
-                  <img src="${course.image}" alt="${course.title}" class="course-image">
-                  <div class="course-category" style="background: ${categoryColors[course.category] || '#667eea'}">
-                      ${course.category.charAt(0).toUpperCase() + course.category.slice(1)}
-                  </div>
-                  <h3 class="course-title">${course.title}</h3>
-                  <div class="course-meta">
-                      <span class="course-price">${course.price}</span>
-                      <span>by ${course.instructor}</span>
-                  </div>
-              `;
-              
-              // Add click event for course details
-              courseElement.addEventListener('click', () => {
-                  showCourseDetails(course);
-              });
-              
-              elements.courseSection.appendChild(courseElement);
-          });
-
-          // Re-initialize animations for new cards
-          setTimeout(() => {
-              document.querySelectorAll('.course-card').forEach(card => {
-                  if (!card.classList.contains('animate')) {
-                      card.classList.add('animate');
-                  }
-              });
-          }, 100);
-      }
-
-      function applyFilter(filter) {
-          // Update active filter button
-          elements.filterButtons.forEach(btn => {
-              btn.classList.remove('active');
-              if (btn.dataset.filter === filter) {
-                  btn.classList.add('active');
-              }
-          });
-
-          state.currentFilter = filter;
-          filterAndRenderCourses();
-          
-          showNotification(`Showing ${filter === 'all' ? 'all' : filter} courses`, 'success');
-      }
-
-      function filterAndRenderCourses() {
-          let filteredCourses = state.allCourses;
-
-          // Apply category filter
-          if (state.currentFilter !== 'all') {
-              filteredCourses = filteredCourses.filter(course => 
-                  course.category === state.currentFilter
-              );
+      // Animate stats
+      const counters = document.querySelectorAll('[data-count]');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            counter.textContent = Math.floor(current) + '+';
+            setTimeout(updateCounter, 20);
+          } else {
+            counter.textContent = target + '+';
           }
+        };
+        
+        // Start animation when in viewport
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+        
+        observer.observe(counter);
+      });
+    });
 
-          // Apply search filter
-          if (state.searchQuery) {
-              filteredCourses = filteredCourses.filter(course =>
-                  course.title.toLowerCase().includes(state.searchQuery) ||
-                  course.instructor.toLowerCase().includes(state.searchQuery) ||
-                  course.description.toLowerCase().includes(state.searchQuery)
-              );
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const theme = localStorage.getItem('theme') || 'dark';
+    
+    document.documentElement.setAttribute('data-theme', theme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Update icon
+      const icon = themeToggle.querySelector('i');
+      if (newTheme === 'light') {
+        icon.className = 'fas fa-sun text-yellow-400';
+      } else {
+        icon.className = 'fas fa-moon text-yellow-400';
+      }
+    });
+
+    // Mobile Menu
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      gsap.from(mobileMenu, { opacity: 0, duration: 0.3 });
+    });
+    
+    closeMobileMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, { opacity: 0, duration: 0.3, onComplete: () => {
+        mobileMenu.classList.add('hidden');
+      }});
+    });
+
+    // Project Filter
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filter = button.getAttribute('data-filter');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category').includes(filter)) {
+            card.style.display = 'block';
+            gsap.from(card, { opacity: 0, y: 20, duration: 0.5 });
+          } else {
+            card.style.display = 'none';
           }
+        });
+      });
+    });
 
-          // Render filtered courses
-          renderCourses(filteredCourses.slice(0, state.loadedCourses));
+    // Project Modal Functions
+    const projectData = {
+      1: {
+        title: "TechPro Task Manager",
+        description: "To'liq funksional vazifa boshqaruv tizimi. Foydalanuvchilar vazifalarni yaratishi, tahrirlashi, o'chirishi va drag & drop orqali kategoriyalar o'rtasida ko'chirishi mumkin.",
+        features: [
+          "Drag & Drop interfeys",
+          "LocalStorage bilan ma'lumotlar saqlash",
+          "Real-time vazifa yangilash",
+          "Responsive dizayn barcha qurilmalarda",
+          "Dark/Light tema",
+          "Vazifa filterlash va qidirish"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS", "LocalStorage API", "Drag & Drop API"],
+        demo: "https://techprosite1.netlify.app/",
+        github: "#",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop"
+      },
+      2: {
+        title: "Modern Landing Page",
+        description: "Zamonaviy marketing landing page. AOS animatsiyalar, smooth scroll navigation va mukammal responsive dizayn.",
+        features: [
+          "AOS.js animatsiyalar",
+          "Smooth scroll navigation",
+          "SEO optimallashtirilgan",
+          "100% PageSpeed ball",
+          "Cross-browser mosligi",
+          "Contact form bilan bog'lanish"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "AOS.js", "Font Awesome", "Google Fonts"],
+        demo: "https://malumotli-site.netlify.app/",
+        github: "#",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop"
+      },
+      3: {
+        title: "Createx Online School",
+        description: "Professional online kurslar platformasi. Foydalanuvchilar kurslarni kategoriya bo'yicha filterlaydi, izlaydi va 'Load More' funksiyasi orqali ko'proq yuklaydi. Modal windows orqali kurs tafsilotlarini ko'rish va konsultatsiyaga yozilish imkoniyati.",
+        features: [
+          "Kurslarni kategoriya bo'yicha filterlash",
+          "Real-time qidiruv tizimi",
+          "Intersection Observer animatsiyalar",
+          "Dynamic 'Load More' funksiyasi",
+          "Modal windows konsultatsiya uchun",
+          "Newsletter subscription",
+          "Responsive barcha ekran o'lchamlarida",
+          "Netlify deployment"
+        ],
+        technologies: ["HTML5", "CSS3", "Vanilla JavaScript", "Intersection Observer", "Debounce Search", "Modal Windows", "Netlify Hosting"],
+        demo: "https://httpsmyportpolionetlifyapp.netlify.app/",
+        github: "#",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop"
+      },
+      4: {
+        title: "ShopDash E-commerce Dashboard",
+        description: "Online do'kon uchun to'liq admin paneli. Mahsulotlar boshqaruvi, buyurtmalar monitoringi va mijozlar boshqaruvi.",
+        features: [
+          "Mahsulotlar CRUD operatsiyalari",
+          "Buyurtmalar monitoringi",
+          "Foydalanuvchilar boshqaruvi",
+          "Chart.js bilan statistikalar",
+          "Real-time notifications",
+          "Export to PDF/Excel"
+        ],
+        technologies: ["React", "TypeScript", "Tailwind CSS", "Chart.js", "React Router", "Redux Toolkit"],
+        demo: "#",
+        github: "#",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop"
+      }
+    };
+
+    function openProjectModal(projectId) {
+      const project = projectData[projectId];
+      if (!project) return;
+      
+      const modal = document.getElementById('projectModal');
+      const content = document.getElementById('modalContent');
+      
+      content.innerHTML = `
+        <div class="p-8">
+          <div class="relative h-64 md:h-80 rounded-xl overflow-hidden mb-8">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h2 class="text-4xl md:text-5xl font-bold text-center">${project.title}</h2>
+            </div>
+          </div>
           
-          // Update load more button visibility
-          elements.loadMoreBtn.style.display = 
-              filteredCourses.length > state.loadedCourses ? 'inline-flex' : 'none';
-      }
-
-      function loadMore() {
-          if (state.isLoading || !state.canLoadMore) return;
-
-          state.isLoading = true;
-          elements.loading.style.display = 'block';
-          elements.loadMoreBtn.disabled = true;
-
-          // Simulate API call delay
-          setTimeout(() => {
-              // Add more courses
-              state.allCourses = [...state.allCourses, ...additionalCourses];
-              state.loadedCourses += 3;
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2">
+              <h3 class="text-2xl font-bold mb-4">Loyiha haqida</h3>
+              <p class="text-text-muted mb-6">${project.description}</p>
               
-              // Check if we have more courses to load
-              state.canLoadMore = state.loadedCourses < 15; // Arbitrary limit
-              
-              filterAndRenderCourses();
-              
-              state.isLoading = false;
-              elements.loading.style.display = 'none';
-              elements.loadMoreBtn.disabled = false;
-              
-              if (!state.canLoadMore) {
-                  elements.loadMoreBtn.innerHTML = '<i class="fa-solid fa-check"></i> All Courses Loaded';
-                  elements.loadMoreBtn.style.cursor = 'default';
-                  elements.loadMoreBtn.onclick = null;
-              }
-              
-              showNotification('New courses loaded successfully!', 'success');
-          }, 1500);
-      }
-
-      // MODAL FUNCTIONS
-      function openModal() {
-          elements.modal.style.display = 'block';
-          document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-          elements.modal.style.display = 'none';
-          document.body.style.overflow = 'auto';
-      }
-
-      function bookConsultation() {
-          showNotification('✅ Consultation booked successfully! We will contact you within 24 hours.', 'success');
-          closeModal();
-      }
-
-      function openLogin() {
-          showNotification('Login/Register feature coming soon! 👨‍💻', 'warning');
-      }
-
-      // SUBSCRIPTION FUNCTION
-      function subscribeNewsletter() {
-          const email = elements.subscribeEmail.value || elements.footerEmail.value;
-          
-          if (!validateEmail(email)) {
-              showNotification('Please enter a valid email address!', 'error');
-              return;
-          }
-
-          // Simulate API call
-          elements.loading.style.display = 'block';
-          
-          setTimeout(() => {
-              showNotification('🎉 Successfully subscribed to newsletter!', 'success');
-              
-              // Reset inputs
-              elements.subscribeEmail.value = '';
-              elements.footerEmail.value = '';
-              
-              elements.loading.style.display = 'none';
-              
-              // Log subscription (simulated)
-              console.log('New subscription:', email);
-          }, 1000);
-      }
-
-      // COURSE DETAILS VIEW
-      function showCourseDetails(course) {
-          const modalContent = `
-              <div class="modal-content" style="max-width: 700px; text-align: left;">
-                  <span class="modal-close" onclick="closeModal()">&times;</span>
-                  <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
-                      <img src="${course.image}" alt="${course.title}" style="width: 100%; border-radius: 15px;">
-                      <div>
-                          <div class="course-category" style="display: inline-block; margin-bottom: 15px;">
-                              ${course.category.toUpperCase()}
-                          </div>
-                          <h2 style="margin-bottom: 15px;">${course.title}</h2>
-                          <p style="color: var(--text-muted); margin-bottom: 20px;">${course.description}</p>
-                          <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 25px;">
-                              <div style="color: var(--primary); font-size: 32px; font-weight: bold;">
-                                  ${course.price}
-                              </div>
-                              <div>
-                                  <div style="font-weight: 600;">Instructor</div>
-                                  <div style="color: var(--text-muted);">${course.instructor}</div>
-                              </div>
-                          </div>
-                          <button class="btn-primary" onclick="enrollCourse(${course.id})" style="width: 100%; padding: 15px;">
-                              <i class="fa-solid fa-cart-plus"></i> Enroll Now
-                          </button>
-                      </div>
-                  </div>
+              <h4 class="text-xl font-bold mb-4">Xususiyatlar</h4>
+              <ul class="space-y-3 mb-8">
+                ${project.features.map(feature => `
+                  <li class="flex items-center">
+                    <i class="fas fa-check text-green-400 mr-3"></i>
+                    <span>${feature}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+            
+            <div>
+              <div class="glass p-6 rounded-xl mb-6">
+                <h4 class="text-xl font-bold mb-4">Texnologiyalar</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${project.technologies.map(tech => `
+                    <span class="px-3 py-1 rounded-full bg-dark-card text-sm">${tech}</span>
+                  `).join('')}
+                </div>
               </div>
-          `;
-          
-          elements.modal.innerHTML = modalContent;
-          openModal();
-      }
+              
+              <div class="space-y-4">
+                <a href="${project.demo}" target="_blank" class="btn-primary w-full flex items-center justify-center py-3">
+                  <i class="fas fa-external-link-alt mr-2"></i>
+                  Live Demo'ni ko'rish
+                </a>
+                
+                <button onclick="closeProjectModal()" class="w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                  Yopish
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+      gsap.from(modal, { opacity: 0, scale: 0.9, duration: 0.3 });
+    }
 
-      function enrollCourse(courseId) {
-          showNotification('🎉 Successfully enrolled in the course!', 'success');
-          closeModal();
-      }
+    function closeProjectModal() {
+      const modal = document.getElementById('projectModal');
+      gsap.to(modal, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.3,
+        onComplete: () => {
+          modal.classList.add('hidden');
+        }
+      });
+    }
 
-      // UTILITY FUNCTIONS
-      function showNotification(message, type = 'success') {
-          elements.notification.textContent = message;
-          elements.notification.className = `notification ${type} show`;
-          
-          setTimeout(() => {
-              elements.notification.classList.remove('show');
-          }, 3000);
-      }
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    const submitText = document.getElementById('submitText');
+    
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const submitButton = this.querySelector('button[type="submit"]');
+      
+      // Show loading state
+      submitButton.disabled = true;
+      submitText.textContent = "Yuborilmoqda...";
+      
+      // Simulate API call
+      setTimeout(() => {
+        // Show success message
+        alert('✅ Rahmat! Xabaringiz qabul qilindi. 24 soat ichida javob beraman.');
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Reset button state
+        submitButton.disabled = false;
+        submitText.textContent = "Xabarni yuborish";
+      }, 2000);
+    });
 
-      function scrollToTop() {
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 100) {
+        navbar.classList.add('glass');
+        navbar.style.backdropFilter = 'blur(10px)';
+      } else {
+        navbar.classList.remove('glass');
+        navbar.style.backdropFilter = 'none';
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
           window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
           });
-      }
-
-      function validateEmail(email) {
-          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return re.test(email);
-      }
-
-      function debounce(func, wait) {
-          let timeout;
-          return function executedFunction(...args) {
-              const later = () => {
-                  clearTimeout(timeout);
-                  func(...args);
-              };
-              clearTimeout(timeout);
-              timeout = setTimeout(later, wait);
-          };
-      }
-
-      // ENROLLMENT COUNTER ANIMATION
-      function animateCounter() {
-          const counterElement = document.createElement('div');
-          counterElement.innerHTML = `
-              <div style="text-align: center; margin: 20px 0; color: var(--primary);">
-                  <h3 style="font-size: 18px; margin-bottom: 10px;">Students Enrolled</h3>
-                  <span id="enrollmentCount" style="font-size: 48px; font-weight: bold;">0</span>
-                  <span style="font-size: 18px; color: var(--text-muted);">+</span>
-              </div>
-          `;
           
-          document.querySelector('.testimonials').appendChild(counterElement);
-          
-          // Animate counter
-          let count = 0;
-          const target = 12450;
-          const duration = 2000;
-          const increment = target / (duration / 16);
-          
-          const timer = setInterval(() => {
-              count += increment;
-              if (count >= target) {
-                  count = target;
-                  clearInterval(timer);
-              }
-              document.getElementById('enrollmentCount').textContent = Math.floor(count).toLocaleString();
-          }, 16);
-      }
+          // Close mobile menu if open
+          if (window.innerWidth < 768) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
 
-      // Start counter animation after page loads
-      setTimeout(animateCounter, 2000);
+    // Initialize GSAP animations
+    gsap.registerEffect({
+      name: "fadeInUp",
+      effect: (targets, config) => {
+        return gsap.from(targets, {
+          y: 50,
+          opacity: 0,
+          duration: config.duration,
+          ease: "power3.out",
+          stagger: config.stagger
+        });
+      },
+      defaults: { duration: 1, stagger: 0.2 }
+    });
 
-      // CONSOLE LOG INITIALIZATION
-      console.log(`
-🚀 CREATE X - PROFESSIONAL LEARNING PLATFORM
-✅ Version: 2.0.0
-✅ Courses loaded: ${state.allCourses.length}
-✅ Features: Filter, Search, Load More, Modals
-✅ Performance: Optimized
-✅ Responsive: Yes
-✅ Browser Support: Modern browsers
-      `);
+    // Animate elements on load
+    window.addEventListener('load', () => {
+      gsap.effects.fadeInUp(".project-card", { duration: 0.8, stagger: 0.1 });
+      
+      // Floating animation for glass elements
+      gsap.to(".glass", {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.1
+      });
+    });
   </script>
 </body>
 </html>
